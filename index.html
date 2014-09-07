@@ -1,1 +1,444 @@
-My GitHub Page
+<!DOCTYPE html>
+<html>
+	<head>
+	    <title>TIC • TAC • TOE</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<script type="text/javascript" src='https://code.jquery.com/jquery-2.1.1.min.js'></script>
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+		<style>
+			body { 
+				font-family: "Gotham Narrow SSm",sans-serif,Arial;
+			    text-align: center;
+			}
+
+			input {
+				padding: 0px;
+				margin: 0px;
+				background: none;
+				border: none;
+				text-align: center;
+				font-size: 60px;
+				font-weight: 500;
+				width: 46px;
+				height: 60px;
+				margin-top: 3px;
+				color: black;
+				text-decoration: none !important;
+				outline: none;
+				color: black;
+			}
+
+			.title {
+				margin-top: 30px;
+				margin-bottom: 30px;
+				font-size: 34px;
+				word-spacing: 0px;
+				display: none;
+			}
+
+
+			.row-container {
+				margin-left: auto;
+				margin-right: auto;
+				text-align: center;
+				display: block;
+			}
+
+			.button-cover {
+				display: none;
+			}
+
+			.row-container {
+				display: inline-table;
+			}
+
+			.row-container > div {
+				display: none;
+				width: 80px;
+				height: 80px;
+				border: 1px solid rgb(120, 120, 120);
+				margin-left: 2px;
+				margin-right: 1px;
+				margin-top: 3px;
+				margin-bottom: 6px;
+			}
+
+			.button {
+				background-color: #006dcc;
+				background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
+				background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
+				background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
+				background-image: -o-linear-gradient(top, #0088cc, #0044cc);
+				background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+				background-repeat: repeat-x;
+				border-bottom-color: #a2a2a2;
+				border-color: #0044cc #0044cc #002a80;
+				border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+				border-color: #c5c5c5;
+				border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
+				border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+				border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+			}
+
+			.button:hover {
+				background-color: #0044cc;
+				background-position: 0 -15px;
+				-webkit-transition: background-position 0.1s linear;
+				-moz-transition: background-position 0.1s linear;
+				-o-transition: background-position 0.1s linear;
+				transition: background-position 0.1s linear;
+				overflow: auto;
+			    outline: none;
+				text-decoration: none !important;
+				cursor: default;
+				webkit-box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
+				-moz-box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
+				box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
+			}
+
+			.new-game-button-container {
+				margin-top: 28px;
+			}
+
+			.new-game-button {
+				display: none;
+				background-color: #006dcc;
+				background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
+				background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
+				background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
+				background-image: -o-linear-gradient(top, #0088cc, #0044cc);
+				background-image: linear-gradient(to bottom, #0088cc, #0044cc);
+				background-repeat: repeat-x;
+				border-bottom-color: #a2a2a2;
+				border-color: #0044cc #0044cc #002a80;
+				border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+				border-color: #c5c5c5;
+				border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
+				border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+				border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+				border-top-width: 2px;
+				border-right-width: 2px;
+				border-bottom-width: 2px;
+				border-left-width: 2px;
+				border-top-style: outset;
+				border-right-style: outset;
+				border-bottom-style: outset;
+				border-left-style: outset;
+				border: 1px solid #bbbbbb;
+				border-radius: 4px;
+				-webkit-border-radius: 4px;
+				-moz-border-radius: 4px;
+				color: #ffffff;
+				cursor: default;
+				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
+				filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+				filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+				font: -webkit-small-control;
+				font-family: "Helvetica Neue",Helvetica,Arial,sans-serif font-size: 14px;
+				line-height: 20px;
+				margin-bottom: 0;
+				padding: 4px 12px;
+				text-align: center;
+				text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+				vertical-align: middle;
+				text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+				padding-top: 7px;
+				padding-right: 14px;
+				padding-bottom: 9px;
+				padding-left: 14px;
+				box-sizing: border-box;
+				margin-top: 0em;
+				margin-right: 0em;
+				margin-bottom: 0em;
+				margin-left: 0em;
+				letter-spacing: 0.4px;
+				word-spacing: normal;
+				line-height: normal;
+				text-transform: none;
+				text-indent: 0px;
+				text-shadow: none;
+				text-align: start;
+				-webkit-writing-mode: horizontal-tb !important;
+				font-size: 13px;
+				overflow: auto;
+			    outline: none;
+			    -webkit-box-shadow: none;
+			    -moz-box-shadow: none;
+				box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 -1px 0 rgba(255, 255, 255, 0.3) inset;
+				text-decoration: none !important;
+			}
+
+			.new-game-button:hover {
+				background-color: #0044cc;
+				background-position: 0 -15px;
+				-webkit-transition: background-position 0.1s linear;
+				-moz-transition: background-position 0.1s linear;
+				-o-transition: background-position 0.1s linear;
+				transition: background-position 0.1s linear;
+				overflow: auto;
+			    outline: none;
+			    -webkit-box-shadow: none;
+			    -moz-box-shadow: none;
+				text-decoration: none !important;
+				cursor: default;
+			}
+
+			.new-game-button:active {
+				background-color: #006dcc;
+				background-image: none;
+				text-decoration: none;
+				outline: 0;
+				cursor: default;
+			}
+		</style>
+	</head>
+	<body>
+		<div class='title'>
+			<span>TIC • TAC • TOE</span>
+		</div>
+		<div class'container'>
+			<div class="row-container" id='first-row'>
+		       	<div class='button'>
+		       		<input class='selection' id='box-one' val='' disabled>
+		        </div>       
+		      	<div class='button'>
+		       		<input class='selection' id='box-two' val='' disabled>
+		        </div>
+		      	<div class='button'>
+		       		<input class='selection' id='box-three' val='' disabled>
+		        </div>    
+			</div>
+			<div class="row-container" id='second-row'>
+		       	<div class='button'>
+		       		<input class='selection' id='box-four' val='' disabled>
+		        </div>       
+		      	<div class='button'>
+		       		<input class='selection' id='box-five' val='' disabled>
+		        </div>    
+		      	<div class='button'>
+		       		<input class='selection' id='box-six' val='' disabled>
+		        </div>    
+			</div>
+			<div class="row-container" id='third-row'>
+		       	<div class='button'>
+		       		<input class='selection' id='box-seven' val='' disabled>
+		        </div>       
+		      	<div class='button'>
+		       		<input class='selection' id='box-eight' val='' disabled>
+		        </div>    
+		      	<div class='button'>
+		       		<input class='selection' id='box-nine' val='' disabled>
+		     	</div>    
+		    </div>
+		</div>
+		<div class='new-game-button-container'>
+			<button type="button" class='new-game-button'>New Game</button>
+		</div>
+	</body>
+	<script type="text/javascript">
+		function letsPlay() {
+		    $(document).ready(function() {
+		        game = new Game;
+		        game.setUp();
+		        game.play();
+		        game.newGame();
+		    });
+		};
+
+		function Game() {
+
+		};
+
+		Game.prototype.currentTurn = 'O';
+		Game.prototype.gameOver = false;
+		Game.prototype.numberOfPlays = 0;
+
+		Game.prototype.boxOne = '';
+		Game.prototype.boxTwo = '';
+		Game.prototype.boxThree = '';
+		Game.prototype.boxFour = '';
+		Game.prototype.boxFive = '';
+		Game.prototype.boxSix = '';
+		Game.prototype.boxSeven = '';
+		Game.prototype.boxEight = '';
+		Game.prototype.boxNine = '';
+
+		Game.prototype.setUp = function() {
+		    $('.title').fadeIn(400, function() {
+		        $('.button').each(function(i) {
+		            $(this).delay(i*200).fadeIn(220);
+		        });
+		    });
+		};
+
+		Game.prototype.play = function() {
+		    $('.button').on('click', function() {
+		        if (!game.gameOver) {
+		            if ($(this).find(':first-child').val() === '') {
+		                game.currentTurn = game.setCurrentTurn();
+		                $(this).find(':first-child').val(game.currentTurn);                
+		                game.boxOne = $("#box-one").val();
+		                game.boxTwo = $("#box-two").val();
+		                game.boxThree = $("#box-three").val();
+		                game.boxFour = $("#box-four").val();
+		                game.boxFive = $("#box-five").val();
+		                game.boxSix = $("#box-six").val();
+		                game.boxSeven = $("#box-seven").val();
+		                game.boxEight = $("#box-eight").val();
+		                game.boxNine = $("#box-nine").val();
+		                game.numberOfPlays += 1;
+		                game.gameOver = game.checkWinner();
+		                if (game.gameOver) console.log("game over");
+		            };
+		        };
+		    });
+		};
+
+		Game.prototype.setCurrentTurn = function() {
+		    return (game.currentTurn === 'O') ? (game.currentTurn = 'X') : (game.currentTurn = 'O');
+		 };
+
+		Game.prototype.checkWinner = function() {   
+		    if (((this.checkRows() || this.checkColumns()) || this.checkDiagonals()) || (this.numberOfPlays === 9)) {
+		        $('.new-game-button').fadeIn(220);
+		        return true;
+		    } else {
+		        return false;
+		    };
+		};
+
+		Game.prototype.checkRows = function() {   
+		    return ((this.checkFirstRow() || this.checkSecondRow()) || this.checkThirdRow());
+		};
+
+		Game.prototype.checkFirstRow = function() {
+		    if (((this.boxOne === 'X') && (this.boxTwo === 'X') && (this.boxThree === 'X')) ||
+		       ((this.boxOne === 'O') && (this.boxTwo === 'O') && (this.boxThree === 'O'))) {
+		        $.each(['#box-one', '#box-two', '#box-three'], function(i, el) {
+		            $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
+		        });
+		        return true
+		    } else {
+		        return false
+		    };
+		};
+
+		Game.prototype.checkSecondRow = function() {
+		  if (((this.boxFour === 'X') && (this.boxFive === 'X') && (this.boxSix === 'X')) || 
+		      ((this.boxFour === 'O') && (this.boxFive === 'O') && (this.boxSix === 'O'))) {
+		        $.each(['#box-four', '#box-five', '#box-six'], function(i, el) {
+		            $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
+		        });
+		        return true
+		    } else {
+		        return false
+		    };
+		};
+
+		Game.prototype.checkThirdRow = function() {
+		    if (((this.boxSeven === 'X') && (this.boxEight === 'X') && (this.boxNine === 'X')) || 
+		       ((this.boxSeven === 'O') && (this.boxEight === 'O') && (this.boxNine === 'O'))) {
+		        $.each(['#box-seven', '#box-eight', '#box-nine'], function(i, el) {
+		            $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
+		        });
+		        return true
+		    } else {
+		        return false
+		    };
+		};
+
+		Game.prototype.checkColumns = function() {   
+		    return ((this.checkFirstColumn() || this.checkSecondColumn()) || this.checkThirdColumn());
+		};
+
+		Game.prototype.checkFirstColumn = function() {
+		   if (((this.boxOne === 'X') && (this.boxFour === 'X') && (this.boxSeven === 'X')) ||
+		       ((this.boxOne === 'O') && (this.boxFour === 'O') && (this.boxSeven === 'O'))) {
+		         $.each(['#box-one', '#box-four', '#box-seven'], function(i, el) {
+		            $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
+		        });
+		         return true
+		    } else {
+		        return false
+		    };
+		};
+
+		Game.prototype.checkSecondColumn = function() {
+		  if (((this.boxTwo === 'X') && (this.boxFive === 'X') && (this.boxEight === 'X')) ||
+		       ((this.boxTwo === 'O') && (this.boxFive === 'O') && (this.boxEight === 'O'))) {
+		         $.each(['#box-two', '#box-five', '#box-eight'], function(i, el) {
+		            $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
+		        });
+		        return true
+		    } else {
+		        return false
+		    };
+		};
+
+		Game.prototype.checkThirdColumn = function() {
+		  if (((this.boxThree === 'X') && (this.boxSix === 'X') && (this.boxNine === 'X')) ||
+		       ((this.boxThree === 'O') && (this.boxSix === 'O') && (this.boxNine === 'O'))) {
+		         $.each(['#box-three', '#box-six', '#box-nine'], function(i, el) {
+		            $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
+		        });
+		        return true
+		    } else {
+		        return false
+		    };
+		};
+
+		Game.prototype.checkDiagonals = function() {   
+		    return (this.checkFirstDiagonal() || this.checkSecondDiagonal());
+		};
+
+		Game.prototype.checkFirstDiagonal = function() {
+		   if (((this.boxOne === 'X') && (this.boxFive === 'X') && (this.boxNine === 'X')) ||
+		       ((this.boxOne === 'O') && (this.boxFive === 'O') && (this.boxNine === 'O'))) {
+		         $.each(['#box-one', '#box-five', '#box-nine'], function(i, el) {
+		            $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
+		        });
+		         return true
+		    } else {
+		        return false
+		    };
+		};
+
+		Game.prototype.checkSecondDiagonal = function() {
+		  if (((this.boxThree === 'X') && (this.boxFive === 'X') && (this.boxSeven === 'X')) ||
+		       ((this.boxThree === 'O') && (this.boxFive === 'O') && (this.boxSeven === 'O'))) {
+		          $.each(['#box-three', '#box-five', '#box-seven'], function(i, el) {
+		            $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
+		        });
+		       return true
+		    } else {
+		        return false
+		    };
+		};
+
+		Game.prototype.newGame = function() {
+		    $('.new-game-button').on('click', function() {
+		        $.each(['#box-one', '#box-two', '#box-three', '#box-four',
+		            '#box-five', '#box-six', '#box-seven', '#box-eight', '#box-nine', 
+		            '.new-game-button'], function(i, el) {
+		            $(el).fadeOut(250, function() {
+		                $('.button').children().val('');
+		                $.each(['#box-one', '#box-two', '#box-three', '#box-four',
+		                '#box-five', '#box-six', '#box-seven', '#box-eight', '#box-nine'], 
+		                function(i, el) {
+		                    $(el).show(function() {
+		                        $('.button').children().css('color', 'rgb(0, 0, 0');
+		                    });
+		                });
+		            });
+		        });
+		        game.currentTurn = 'O';
+		        game.numberOfPlays = 0;
+		        game.gameOver = false;
+		        console.log("new game");
+		    });
+		};
+
+		letsPlay();
+	</script>
+</html>
+
