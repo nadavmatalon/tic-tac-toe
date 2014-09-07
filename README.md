@@ -4,7 +4,8 @@
 
 * [App Screenshot](#app-screenshot)
 * [General Description](#general-description)
-* [How to Run the Game](#how-to-run-the-game)
+* [See it Live on Github.io](#see-it-live-on-github.io)
+* [How to Run the Game Locally](#how-to-run-the-game-locally)
 * [Browsers](#browsers)
 * [Testing](#testing)
 * [License](#license)
@@ -34,7 +35,16 @@ It uses [jQuery](http://jquery.com) functionality and was created according to
 (test were written with [Jasmine](http://jasmine.github.io/2.0/introduction.html)). 
 
 
-##How to Run the Game
+##See it Live on Github.io
+			
+A live version of the game can be found (and played!) at:
+
+[Tic-Tac-Toe on Github.io](http://nadavmatalon.github.io/tic-tac-toe/)
+
+(Please see notes about browser compatibility below).
+
+
+##How to Run the Game Locally
 
 Clone the repo to a local folder and run:
 
