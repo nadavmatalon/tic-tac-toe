@@ -27,11 +27,11 @@
 
 This app was created as an exercise in buiding a 
 [JavaScript](http://en.wikipedia.org/wiki/JavaScript) web application featuring the 
-famous game of [Tic Tac Toe](http://en.wikipedia.org/wiki/Tic-tac-toe).
+famous game of [Tic-Tac-Toe](http://en.wikipedia.org/wiki/Tic-tac-toe).
 
 It uses [jQuery](http://jquery.com) functionality and was created according to 
 [TDD](http://en.wikipedia.org/wiki/Test-driven_development) methodology 
-(test were written with [Jasmine (2.0.0)](http://jasmine.github.io/2.0/introduction.html)). 
+(test were written with [Jasmine](http://jasmine.github.io/2.0/introduction.html)). 
 
 
 ##How to Run the Game
