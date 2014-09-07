@@ -4,7 +4,7 @@
 
 * [App Screenshot](#app-screenshot)
 * [General Description](#general-description)
-* [See it Live on Github.io](#see-it-live-on-github.io)
+* [See it Live on Github](#see-it-live-on-github)
 * [How to Run the Game Locally](#how-to-run-the-game-locally)
 * [Browsers](#browsers)
 * [Testing](#testing)
@@ -35,7 +35,7 @@ It uses [jQuery](http://jquery.com) functionality and was created according to
 (test were written with [Jasmine](http://jasmine.github.io/2.0/introduction.html)). 
 
 
-##See it Live on Github.io
+##See it Live on Github
 			
 A live version of the game can be found (and played!) at:
 
