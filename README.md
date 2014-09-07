@@ -16,7 +16,7 @@
 	<tr>
 		<td align="center">
 			<a href="https://raw.githubusercontent.com/nadavmatalon/tic-tac-toe/master/public/images/tic-tac-toe-screenshot.png">
-				<img src="/public/images/tic-tac-toe-screenshot.png" width="650" height="300" />
+				<img src="/public/images/tic-tac-toe-screenshot.png" width="450" height="300" />
 			</a>
 		</td>
 	</tr>
