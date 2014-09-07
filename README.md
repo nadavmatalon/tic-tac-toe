@@ -17,7 +17,7 @@
 	<tr>
 		<td align="center">
 			<a href="https://raw.githubusercontent.com/nadavmatalon/tic-tac-toe/master/public/images/tic-tac-toe-screenshot.png">
-				<img src="/master/public/images/tic-tac-toe-screenshot.png" width="500" height="400" />
+				<img src="https://raw.githubusercontent.com/nadavmatalon/tic-tac-toe/master/public/images/tic-tac-toe-screenshot.png" width="500" height="400" />
 			</a>
 		</td>
 	</tr>
