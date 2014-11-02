@@ -1,16 +1,12 @@
 
 function letsPlay() {
-    $(document).ready(function() {
-        game = new Game;
-        game.setUp();
-        game.play();
-        game.newGame();
-    });
+    game = new Game;
+    game.setUp();
+    game.play();
+    game.newGame();
 };
 
-function Game() {
-
-};
+function Game() {}
 
 Game.prototype.currentTurn = 'O';
 Game.prototype.gameOver = false;
@@ -28,8 +24,8 @@ Game.prototype.boxNine = '';
 
 Game.prototype.setUp = function() {
     $('.title').fadeIn(400, function() {
-        $('.button').each(function(i) {
-            $(this).delay(i*200).fadeIn(220);
+        $('.button').each(function(boxAppear) {
+            $(this).delay(boxAppear*200).fadeIn(220);
         });
     });
 };
@@ -51,9 +47,8 @@ Game.prototype.play = function() {
                 game.boxNine = $("#box-nine").val();
                 game.numberOfPlays += 1;
                 game.gameOver = game.checkWinner();
-                if (game.gameOver) console.log("game over");
-            };
-        };
+            }
+        }
     });
 };
 
@@ -67,7 +62,7 @@ Game.prototype.checkWinner = function() {
         return true;
     } else {
         return false;
-    };
+    }
 };
 
 Game.prototype.checkRows = function() {   
@@ -80,10 +75,10 @@ Game.prototype.checkFirstRow = function() {
         $.each(['#box-one', '#box-two', '#box-three'], function(i, el) {
             $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
         });
-        return true
+        return true;
     } else {
-        return false
-    };
+        return false;
+    }
 };
 
 Game.prototype.checkSecondRow = function() {
@@ -92,10 +87,10 @@ Game.prototype.checkSecondRow = function() {
         $.each(['#box-four', '#box-five', '#box-six'], function(i, el) {
             $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
         });
-        return true
+        return true;
     } else {
-        return false
-    };
+        return false;
+    }
 };
 
 Game.prototype.checkThirdRow = function() {
@@ -104,10 +99,10 @@ Game.prototype.checkThirdRow = function() {
         $.each(['#box-seven', '#box-eight', '#box-nine'], function(i, el) {
             $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
         });
-        return true
+        return true;
     } else {
-        return false
-    };
+        return false;
+    }
 };
 
 Game.prototype.checkColumns = function() {   
@@ -120,10 +115,10 @@ Game.prototype.checkFirstColumn = function() {
          $.each(['#box-one', '#box-four', '#box-seven'], function(i, el) {
             $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
         });
-         return true
+         return true;
     } else {
-        return false
-    };
+        return false;
+    }
 };
 
 Game.prototype.checkSecondColumn = function() {
@@ -132,10 +127,10 @@ Game.prototype.checkSecondColumn = function() {
          $.each(['#box-two', '#box-five', '#box-eight'], function(i, el) {
             $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
         });
-        return true
+        return true;
     } else {
-        return false
-    };
+        return false;
+    }
 };
 
 Game.prototype.checkThirdColumn = function() {
@@ -144,10 +139,10 @@ Game.prototype.checkThirdColumn = function() {
          $.each(['#box-three', '#box-six', '#box-nine'], function(i, el) {
             $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
         });
-        return true
+        return true;
     } else {
-        return false
-    };
+        return false;
+    }
 };
 
 Game.prototype.checkDiagonals = function() {   
@@ -160,10 +155,10 @@ Game.prototype.checkFirstDiagonal = function() {
          $.each(['#box-one', '#box-five', '#box-nine'], function(i, el) {
             $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
         });
-         return true
+         return true;
     } else {
-        return false
-    };
+        return false;
+    }
 };
 
 Game.prototype.checkSecondDiagonal = function() {
@@ -172,10 +167,10 @@ Game.prototype.checkSecondDiagonal = function() {
           $.each(['#box-three', '#box-five', '#box-seven'], function(i, el) {
             $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
         });
-       return true
+       return true;
     } else {
-        return false
-    };
+        return false;
+    }
 };
 
 Game.prototype.newGame = function() {
@@ -197,9 +192,6 @@ Game.prototype.newGame = function() {
         game.currentTurn = 'O';
         game.numberOfPlays = 0;
         game.gameOver = false;
-        console.log("new game");
     });
 };
-
-letsPlay();
 
