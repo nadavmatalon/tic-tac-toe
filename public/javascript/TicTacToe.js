@@ -8,46 +8,71 @@ function letsPlay() {
 
 function Game() {};
 
-Game.prototype.currentTurn = 'O';
-Game.prototype.gameOver = false;
 Game.prototype.numberOfPlays = 0;
+Game.prototype.currentTurn = function() { this.setRandomFirstTurn() };
+Game.prototype.gameOver = false;
+
+Game.prototype.BOXES = ['#box-one', '#box-two', '#box-three', 
+                        '#box-four', '#box-five', '#box-six', 
+                        '#box-seven', '#box-eight', '#box-nine'];
 
 Game.prototype.setUp = function() {
     $('.title').fadeIn(400, function() {
-        $('.button').each(function(box) {
+        $('.box').each(function(box) {
             $(this).delay(box*200).fadeIn(220);
         });
     });
 };
 
 Game.prototype.play = function() {
-    $('.button').on('click', function() {
+    $('.box').on('click', function() {
         if (!game.gameOver) {
-            if ($(this).find(':first-child').val() === '') {
-                game.currentTurn = game.setCurrentTurn();
-                $(this).find(':first-child').val(game.currentTurn);                
-                game.numberOfPlays += 1;
-                game.gameOver = game.checkGameOver();
-            }
+            var selectedBox = $(this).find(':first-child');
+            game.playTurn(selectedBox);
         }
     });
 };
 
+Game.prototype.playTurn = function(selectedBox) {
+    if (this.boxEmpty(selectedBox)) {
+        this.setCurrentTurn();
+        $(selectedBox).val(this.currentTurn);                
+        this.incrementNunberOfPlays();
+        this.checkGameOver();
+    }
+};
+
+Game.prototype.boxEmpty = function(selectedBox) {
+    return selectedBox.val() === '';
+};
+
+Game.prototype.incrementNunberOfPlays = function() {
+    return this.numberOfPlays += 1;
+};
+
 Game.prototype.setCurrentTurn = function() {
-    return (this.currentTurn === 'O') ? (this.currentTurn = 'X') : (this.currentTurn = 'O');
+    if (this.currentTurn === 'O') { 
+        return this.currentTurn = 'X';
+    } else { 
+        return this.currentTurn = 'O';
+    }
+};
+
+Game.prototype.setRandomFirstTurn = function() {
+    return ['X', 'O'][Math.floor(Math.random()*['X', 'O'].length)]; 
 };
 
 Game.prototype.checkGameOver = function() {   
     if (this.foundWinningStreak() || this.maxNumberOfPlays()) {
         $('.new-game-button').fadeIn(220);
-        return true;
+        return this.gameOver = true;
     } else {
-        return false;
+        return this.gameOver = false;
     }
 };
 
 Game.prototype.maxNumberOfPlays = function() {
-    return game.numberOfPlays === 9;
+    return this.numberOfPlays === 9;
 };
 
 Game.prototype.foundWinningStreak = function() {
@@ -93,33 +118,32 @@ Game.prototype.boxValuesStr = function(boxes) {
 
 Game.prototype.markWinningSquence = function(boxes) {
     $.each(boxes, function(index, box) {
-        $(box).animate({ color: "rgb(255, 255, 255)" }, 200);
+        $(box).animate({ color: 'rgb(255, 255, 255)' }, 200);
     });
 };
 
 Game.prototype.newGame = function() {
-    var boxes = ['#box-one', '#box-two', '#box-three', 
-                 '#box-four', '#box-five', '#box-six', 
-                 '#box-seven', '#box-eight', '#box-nine'];
-    var boxText = $('.button').children();
     $('.new-game-button').on('click', function() {
-        $.each(boxes.concat(['.new-game-button']), function(index, boxValue) {
-            $(boxValue).fadeOut(250, function() {
-                boxText.val('');
-                $.each(boxes, function(index, box) {
-                    $(box).show(function() {
-                        boxText.css('color', 'rgb(0, 0, 0');
-                    });
-                });
-            });
-        });
+        game.resetBoxParameters();
         game.resetGameParameters();
     });
 };
 
+Game.prototype.resetBoxParameters = function() {
+    $.each(game.BOXES.concat(['.new-game-button']), function(index, boxValue) {
+        $(boxValue).fadeOut(250, function() {
+            $.each(game.BOXES, function(index, box) {
+                $(box).val('').show(function() {
+                    $('.box').children().css('color', 'rgb(0, 0, 0');
+                });
+            });
+        });
+    });
+};
+
 Game.prototype.resetGameParameters = function() {
-    game.currentTurn = 'O';
-    game.numberOfPlays = 0;
-    game.gameOver = false;
+    this.numberOfPlays = 0;
+    this.currentTurn = this.setRandomFirstTurn();
+    this.gameOver = false;
 };
 
