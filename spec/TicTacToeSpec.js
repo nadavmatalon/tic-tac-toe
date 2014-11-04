@@ -47,11 +47,23 @@ describe("Tic-Tac-Toe::", function() {
             expect(game.foundWinningSequence()).toBe(false);
         });
 
-        it('should return the winning sequence if there is one', function() {
+        it('should return true if there is a winning sequence', function() {
+           var sequences =  [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+            for (var i=0; i < sequences.length; i++) {
+                game = new Game;
+                for (var j=0; j < 3; j++) {
+                    game.registerMove(sequences[i][j]);
+                }
+                expect(game.foundWinningSequence()).toBe(true);
+            }
+        });
+
+        it('should register the winning sequence in the game\'s attributes if it finds one', function() {
             game.registerMove(0);
             game.registerMove(1);
             game.registerMove(2);
-            expect(game.foundWinningSequence()).toBe(true);
+            game.foundWinningSequence();
+            expect(game.winningSequence).toEqual([0, 1, 2]);
         });
     });
 
@@ -61,18 +73,22 @@ describe("Tic-Tac-Toe::", function() {
             expect(game.checkGameOver()).toBe(false);
         });
 
-        it('should return true if max number of moves where registered', function() {
+        it('should return true if max number of moves have been registered', function() {
             for (var i=0; i < game.MAX_NUMBER_OF_MOVES; i++) {
                 game.registerMove(i);
             }
             expect(game.checkGameOver()).toBe(true);
         });        
 
-        it('should return true if winning sequence was found', function() {
-            game.registerMove(0);
-            game.registerMove(1);
-            game.registerMove(2);
-            expect(game.checkGameOver()).toBe(true);
+        it('should return true if winning sequence is found', function() {
+            var sequences =  [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+            for (var i=0; i < sequences.length; i++) {
+                game = new Game;
+                for (var j=0; j < 3; j++) {
+                    game.registerMove(sequences[i][j]);
+                }
+                expect(game.checkGameOver()).toBe(true);
+            }
         }); 
 
         it('should return false if winning sequence is not found', function() {
@@ -109,9 +125,7 @@ describe("Tic-Tac-Toe::", function() {
         });
 
     });
-
- 
-
+    
 });
 
 
