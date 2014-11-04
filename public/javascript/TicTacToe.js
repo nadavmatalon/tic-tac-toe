@@ -32,10 +32,9 @@ Game.prototype.playGame = function() {
     $('.square').on('click', function() {
         var squareIdentifier = $(this).data('pick');
         if (!game.gameOver && game.squareEmpty(squareIdentifier)) {
-            game.numberOfMoves += 1;
-            game.grid[squareIdentifier] = game.currentTurn;
+            game.registerMove(squareIdentifier);
             $(this).find(':first-child').val(game.currentTurn);
-            game.gameOver = game.checkGameOver();
+            game.checkGameOver();
         }
     });
 };
@@ -44,24 +43,31 @@ Game.prototype.setRandomFirstTurn = function() {
     return ['X', 'O'][Math.floor(Math.random()*['X', 'O'].length)]; 
 };
 
+Game.prototype.registerMove = function(squareIdentifier) {
+    this.grid[squareIdentifier] = this.currentTurn;
+    this.numberOfMoves += 1;
+}
+
 Game.prototype.checkGameOver = function() {   
     if (this.foundWinningSequence() || this.noAvailableMoves()) {
         this.markWinningSequence(this.winningSequence);
         this.showNewGameButton();
-        return true;
+        return this.gameOver = true;
     } else {
-        game.switchTurn();
-        return false;
+        this.switchTurn();
+        return this.gameOver = false;
     }
 };
 
 Game.prototype.foundWinningSequence = function() {
     var sequences =  [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
-    $.each(sequences, function(index, sequence) {
-        var squenceValues = sequences[index].map( function(identifier) { return game.grid[identifier]; }).join('');
-        if ($.inArray(squenceValues, ['XXX', 'OOO']) > -1) { game.winningSequence = sequences[index]; }
-    });
-    return game.winningSequence != null;
+    for (var i=0; i < sequences.length; i++) {
+        var squenceValues = (this.grid[sequences[i][0]]) + (this.grid[sequences[i][1]]) + (this.grid[sequences[i][2]]);
+        if ((squenceValues == 'XXX') || (squenceValues == 'OOO')) {
+            this.winningSequence = sequences[i];
+        }
+    }
+    return this.winningSequence != null;
 };
 
 Game.prototype.markWinningSequence = function(squareIdentifiers) {
