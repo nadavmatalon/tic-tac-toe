@@ -61,7 +61,7 @@ describe("Tic-Tac-Toe::", function() {
             expect(game.checkGameOver()).toBe(false);
         });
 
-        it('should return true if max number of moves where made', function() {
+        it('should return true if max number of moves where registered', function() {
             for (var i=0; i < game.MAX_NUMBER_OF_MOVES; i++) {
                 game.registerMove(i);
             }
@@ -83,6 +83,34 @@ describe("Tic-Tac-Toe::", function() {
         }); 
 
     });
+
+    describe('no available moves function', function() {
+
+        it('should initially return false', function() {
+            expect(game.noAvailableMoves()).toBe(false);
+        });
+
+        it('should return true if there are no more available moves', function() {
+            game.numberOfMoves = 9;
+            expect(game.noAvailableMoves()).toBe(true);
+        });
+
+    });
+
+    describe('square empty function', function() {
+
+        it('should return true if square is empty', function() {
+            expect(game.squareEmpty(0)).toBe(true);
+        });
+
+        it('should return false if square is not empty', function() {
+            game.registerMove(0);
+            expect(game.squareEmpty(0)).toBe(false);
+        });
+
+    });
+
+ 
 
 });
 
