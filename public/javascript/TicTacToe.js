@@ -1,9 +1,13 @@
 
+$(document).ready(function() {
+    letsPlay();
+});
+
 function letsPlay() {
     game = new Game;
-    game.setupGrid();
-    game.play();
-    game.restartGame();
+    game.setupGame();
+    game.playGame();
+    game.newGame();
 };
 
 function Game() {
@@ -16,7 +20,7 @@ function Game() {
 
 Game.prototype.MAX_NUMBER_OF_MOVES = 9;
 
-Game.prototype.setupGrid = function() {
+Game.prototype.setupGame = function() {
     $('.title').fadeIn(400, function() {
         $('.square').each(function(square) {
             $(this).delay(square*200).fadeIn(220);
@@ -24,7 +28,7 @@ Game.prototype.setupGrid = function() {
     });
 };
 
-Game.prototype.play = function() {
+Game.prototype.playGame = function() {
     $('.square').on('click', function() {
         var squareIdentifier = $(this).data('pick');
         if (!game.gameOver && game.squareEmpty(squareIdentifier)) {
@@ -85,7 +89,7 @@ Game.prototype.switchTurn = function() {
     return this.currentTurn == 'O' ? this.currentTurn = 'X' : this.currentTurn = 'O';
 };
 
-Game.prototype.restartGame = function() {
+Game.prototype.newGame = function() {
     $('.new-game-button').on('click', function() {
         game.resetSquaresParameters();
         game = new Game();
