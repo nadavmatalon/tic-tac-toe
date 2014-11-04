@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<link type="text/css" rel="stylesheet" href="./../public/css/style.css" />
 		<link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">
-		<script type="text/javascript" src='https://code.jquery.com/jquery-2.1.1.min.js'></script>
+		<script type="text/javascript" src='./../public/javascript/jquery-2.1.1.js'></script>
  		<script type="text/javascript" src="https://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
 		<script src='./../public/javascript/TicTacToe.js'></script>
 	</head>
@@ -14,38 +14,38 @@
 		<div class='title'>
 			<span>TIC • TAC • TOE</span>
 		</div>
-		<div class'boxes-container'>
-			<div class='row-container' id='first-row' >
-		       	<div class='box'>
-		       		<input class='selection' id='box-one' val='' disabled >
+		<div class'squares-container'>
+			<div class='column-container' id='first-column' >
+		       	<div class='square' data-pick='0'>
+		       		<input class='selection' id='0' val='' disabled >
 		        </div>       
-		      	<div class='box'>
-		       		<input class='selection' id='box-two' val='' disabled >
+		      	<div class='square' data-pick='3'>
+		       		<input class='selection' id='3' val='' disabled >
 		        </div>
-		      	<div class='box'>
-		       		<input class='selection' id='box-three' val='' disabled >
+		      	<div class='square' data-pick='6'>
+		       		<input class='selection' id='6' val='' disabled >
 		        </div>    
 			</div>
-			<div class='row-container' id='second-row'>
-		       	<div class='box'>
-		       		<input class='selection' id='box-four' val='' disabled >
+			<div class='column-container' id='second-column'>
+		       	<div class='square' data-pick='1'>
+		       		<input class='selection' id='1' val='' disabled >
 		        </div>       
-		      	<div class='box'>
-		       		<input class='selection' id='box-five' val='' disabled >
+		      	<div class='square' data-pick='4'>
+		       		<input class='selection' id='4' val='' disabled >
 		        </div>    
-		      	<div class='box'>
-		       		<input class='selection' id='box-six' val='' disabled >
+		      	<div class='square' data-pick='7'>
+		       		<input class='selection' id='7' val='' disabled >
 		        </div>    
 			</div>
-			<div class='row-container' id='third-row'>
-		       	<div class='box'>
-		       		<input class='selection' id='box-seven' val='' disabled >
+			<div class='column-container' id='third-column'>
+		       	<div class='square' data-pick='2'>
+		       		<input class='selection' id='2' val='' disabled >
 		        </div>       
-		      	<div class='box'>
-		       		<input class='selection' id='box-eight' val='' disabled >
+		      	<div class='square' data-pick='5'>
+		       		<input class='selection' id='5' val='' disabled >
 		        </div>    
-		      	<div class='box'>
-		       		<input class='selection' id='box-nine' val='' disabled >
+		      	<div class='square' data-pick='8'>
+		       		<input class='selection' id='8' val='' disabled >
 		     	</div>    
 		    </div>
 		</div>

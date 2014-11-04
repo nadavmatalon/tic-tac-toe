@@ -27,14 +27,14 @@ input {
 	display: none;
 }
 
-.row-container {
+.column-container {
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
 	display: block;
 }
 
-.row-container > div {
+.column-container > div {
 	display: none;
 	width: 80px;
 	height: 80px;
@@ -45,11 +45,11 @@ input {
 	margin-bottom: 6px;
 }
 
-.row-container {
+.column-container {
 	display: inline-table;
 }
 
-.box {
+.square {
 	background-color: #006dcc;
 	background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));

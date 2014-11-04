@@ -1,61 +1,39 @@
 
 function letsPlay() {
     game = new Game;
-    game.setUp();
+    game.setupGrid();
     game.play();
-    game.newGame();
+    game.restartGame();
 };
 
-function Game() {};
+function Game() {
+    this.grid = Array.apply(undefined, new Array(9));
+    this.numberOfMoves = 0;
+    this.currentTurn = this.setRandomFirstTurn();
+    this.winningSequence = null;
+    this.gameOver = false;
+};
 
-Game.prototype.numberOfPlays = 0;
-Game.prototype.currentTurn = function() { this.setRandomFirstTurn() };
-Game.prototype.gameOver = false;
+Game.prototype.MAX_NUMBER_OF_MOVES = 9;
 
-Game.prototype.BOXES = ['#box-one', '#box-two', '#box-three', 
-                        '#box-four', '#box-five', '#box-six', 
-                        '#box-seven', '#box-eight', '#box-nine'];
-
-Game.prototype.setUp = function() {
+Game.prototype.setupGrid = function() {
     $('.title').fadeIn(400, function() {
-        $('.box').each(function(box) {
-            $(this).delay(box*200).fadeIn(220);
+        $('.square').each(function(square) {
+            $(this).delay(square*200).fadeIn(220);
         });
     });
 };
 
 Game.prototype.play = function() {
-    $('.box').on('click', function() {
-        if (!game.gameOver) {
-            var selectedBox = $(this).find(':first-child');
-            game.playTurn(selectedBox);
+    $('.square').on('click', function() {
+        var squareIdentifier = $(this).data('pick');
+        if (!game.gameOver && game.squareEmpty(squareIdentifier)) {
+            game.numberOfMoves += 1;
+            game.grid[squareIdentifier] = game.currentTurn;
+            $(this).find(':first-child').val(game.currentTurn);
+            game.gameOver = game.checkGameOver();
         }
     });
-};
-
-Game.prototype.playTurn = function(selectedBox) {
-    if (this.boxEmpty(selectedBox)) {
-        this.setCurrentTurn();
-        $(selectedBox).val(this.currentTurn);                
-        this.incrementNunberOfPlays();
-        this.checkGameOver();
-    }
-};
-
-Game.prototype.boxEmpty = function(selectedBox) {
-    return selectedBox.val() === '';
-};
-
-Game.prototype.incrementNunberOfPlays = function() {
-    return this.numberOfPlays += 1;
-};
-
-Game.prototype.setCurrentTurn = function() {
-    if (this.currentTurn === 'O') { 
-        return this.currentTurn = 'X';
-    } else { 
-        return this.currentTurn = 'O';
-    }
 };
 
 Game.prototype.setRandomFirstTurn = function() {
@@ -63,87 +41,67 @@ Game.prototype.setRandomFirstTurn = function() {
 };
 
 Game.prototype.checkGameOver = function() {   
-    if (this.foundWinningStreak() || this.maxNumberOfPlays()) {
-        $('.new-game-button').fadeIn(220);
-        return this.gameOver = true;
-    } else {
-        return this.gameOver = false;
-    }
-};
-
-Game.prototype.maxNumberOfPlays = function() {
-    return this.numberOfPlays === 9;
-};
-
-Game.prototype.foundWinningStreak = function() {
-    return this.checkRows() || this.checkColumns() || this.checkDiagonals();
-};
-
-Game.prototype.checkRows = function() { 
-    var firstRow = ["#box-one", "#box-two", "#box-three"];
-    var secondRow = ["#box-four", "#box-five", "#box-six"];
-    var thirdRow = ["#box-seven", "#box-eight", "#box-nine"];
-    return this.check(firstRow) || this.check(secondRow) || this.check(thirdRow);
-};
-
-Game.prototype.checkColumns = function() { 
-    var firstColumn = ["#box-one", "#box-four", "#box-seven"];
-    var secondColumn = ["#box-two", "#box-five", "#box-eight"];
-    var thirdColumn = ["#box-three", "#box-six", "#box-nine"];
-    return this.check(firstColumn) || this.check(secondColumn) || this.check(thirdColumn);
-};
-
-Game.prototype.checkDiagonals = function() { 
-    var firstDiagonal = ["#box-one", "#box-five", "#box-nine"];
-    var secondDiagonal = ["#box-three", "#box-five", "#box-seven"];
-    return this.check(firstDiagonal) || this.check(secondDiagonal);
-};
-
-Game.prototype.check = function(boxes) {
-    if (this.winningStreak(boxes)) {
-        this.markWinningSquence(boxes);
+    if (this.foundWinningSequence() || this.noAvailableMoves()) {
+        this.markWinningSequence(this.winningSequence);
+        this.showNewGameButton();
         return true;
     } else {
+        game.switchTurn();
         return false;
     }
 };
 
-Game.prototype.winningStreak = function(boxes) {
-    return $.inArray(this.boxValuesStr(boxes), ['XXX', 'OOO']) > -1;
-};
-
-Game.prototype.boxValuesStr = function(boxes) {
-    return $(boxes[0]).val() + $(boxes[1]).val() + $(boxes[2]).val();
-};
-
-Game.prototype.markWinningSquence = function(boxes) {
-    $.each(boxes, function(index, box) {
-        $(box).animate({ color: 'rgb(255, 255, 255)' }, 200);
+Game.prototype.foundWinningSequence = function() {
+    var sequences =  [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+    $.each(sequences, function(index, sequence) {
+        var squenceValues = sequences[index].map( function(identifier) { return game.grid[identifier]; }).join('');
+        if ($.inArray(squenceValues, ['XXX', 'OOO']) > -1) { game.winningSequence = sequences[index]; }
     });
+    return game.winningSequence != null;
 };
 
-Game.prototype.newGame = function() {
+Game.prototype.markWinningSequence = function(squareIdentifiers) {
+    if (this.winningSequence) {
+        $.each(squareIdentifiers, function(index, squareIdentifier) {
+            square = document.getElementById(squareIdentifier);
+            $(square).animate({ color: 'rgb(255, 255, 255)' }, 200);
+        });
+    }
+};
+
+Game.prototype.noAvailableMoves = function() {
+    return this.numberOfMoves === game.MAX_NUMBER_OF_MOVES;
+};
+
+Game.prototype.showNewGameButton = function() {
+    $('.new-game-button').fadeIn(220);
+};
+
+Game.prototype.squareEmpty = function (squareIdentifier) {
+    return this.grid[squareIdentifier] == null;
+};
+
+Game.prototype.switchTurn = function() {
+    return this.currentTurn == 'O' ? this.currentTurn = 'X' : this.currentTurn = 'O';
+};
+
+Game.prototype.restartGame = function() {
     $('.new-game-button').on('click', function() {
-        game.resetBoxParameters();
-        game.resetGameParameters();
+        game.resetSquaresParameters();
+        game = new Game();
     });
 };
 
-Game.prototype.resetBoxParameters = function() {
-    $.each(game.BOXES.concat(['.new-game-button']), function(index, boxValue) {
+Game.prototype.resetSquaresParameters = function() {
+    var squares = ['#0', '#1', '#2', '#3', '#4', '#5', '#6', '#7', '#8'];
+    $.each(squares.concat(['.new-game-button']), function(index, boxValue) {
         $(boxValue).fadeOut(250, function() {
-            $.each(game.BOXES, function(index, box) {
-                $(box).val('').show(function() {
-                    $('.box').children().css('color', 'rgb(0, 0, 0');
+            $.each(squares, function(index, square) {
+                $(square).val('').show(function() {
+                    $('.square').children().css('color', 'rgb(0, 0, 0');
                 });
             });
         });
     });
-};
-
-Game.prototype.resetGameParameters = function() {
-    this.numberOfPlays = 0;
-    this.currentTurn = this.setRandomFirstTurn();
-    this.gameOver = false;
 };
 
