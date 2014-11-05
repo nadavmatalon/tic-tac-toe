@@ -1,6 +1,7 @@
+
 body { 
 	font-family: "Gotham Narrow SSm",sans-serif,Arial;
-    text-align: center;
+	text-align: center;
 }
 
 input {
@@ -73,7 +74,7 @@ input {
 	-moz-box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
 	webkit-box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
 	overflow: auto;
-    outline: none;
+	outline: none;
 	text-decoration: none !important;
 	cursor: default;
 }
@@ -98,8 +99,8 @@ input {
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
-   	-webkit-box-shadow: none;
-    -moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
 	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 -1px 0 rgba(255, 255, 255, 0.3) inset;
 	box-sizing: border-box;
 	color: #ffffff;
@@ -114,13 +115,13 @@ input {
 	line-height: normal;
 	margin: 0px;
 	overflow: auto;
-    outline: none;
+	outline: none;
 	padding-top: 7px;
 	padding-right: 14px;
 	padding-bottom: 9px;
 	padding-left: 14px;
 	text-align: center;
- 	text-decoration: none !important;
+	text-decoration: none !important;
 	text-indent: 0px;
 	text-transform: none;
 	text-shadow: none;
@@ -139,9 +140,9 @@ input {
 	-o-transition: background-position 0.1s linear;
 	transition: background-position 0.1s linear;
 	overflow: auto;
-    outline: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
+	outline: none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
 	text-decoration: none !important;
 	cursor: default;
 }
