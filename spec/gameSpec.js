@@ -61,12 +61,13 @@ describe("Tic-Tac-Toe::", function() {
         it('should register each move in the grid\'s array', function() {
             game.registerMove(0);
             expect(game.grid[0]).toBe(game.currentTurn);
+            expect(game.numberOfMoves).toEqual(1);
         });
     });
 
     describe('check winning sequence function', function() {
 
-        it('should register winning sequence if there is one', function() {
+        it('should record winning sequence if there is one', function() {
            var sequences =  [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
             for (var i=0; i < sequences.length; i++) {
                 game = new Game;
@@ -93,14 +94,14 @@ describe("Tic-Tac-Toe::", function() {
             expect(game.gameOver()).toBe(false);
         }); 
 
-        it('should return true if max number of moves have been registered', function() {
+        it('should return true if max number of moves have been made', function() {
             for (var i=0; i < game.MAX_NUMBER_OF_MOVES; i++) {
                 game.registerMove(i);
             }
             expect(game.gameOver()).toBe(true);
         });        
 
-        it('should return true if winning sequence exists', function() {
+        it('should return true if winning sequence was recorded', function() {
             var sequences =  [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
             for (var i=0; i < sequences.length; i++) {
                 game = new Game;
