@@ -1,3 +1,4 @@
+
 var Game = function() {
     this.grid = Array.apply(undefined, new Array(9));
     this.numberOfMoves = 0;
@@ -15,11 +16,14 @@ Game.prototype.playTurn = function(squareIdentifier) {
 	this.numberOfMoves += 1;
 	this.registerMove(squareIdentifier);
 	this.switchTurn();
-    return this.winningSequence;
 };
 
 Game.prototype.registerMove = function(squareIdentifier) {
     this.grid[squareIdentifier] = this.currentTurn;
+};
+
+Game.prototype.switchTurn = function() {
+    return this.currentTurn === 'O' ? this.currentTurn = 'X' : this.currentTurn = 'O';
 };
 
 Game.prototype.gameOver = function() {
@@ -43,7 +47,7 @@ Game.prototype.foundWinningSequence = function() {
             this.winningSequence = sequences[i];
         }
     }
-    return this.winningSequence !== undefined;
+    return this.winningSequence;
 };
 
 Game.prototype.noAvailableMoves = function() {
@@ -54,7 +58,4 @@ Game.prototype.emptySquare = function(squareIdentifier) {
     return this.grid[squareIdentifier] === undefined;
 };
 
-Game.prototype.switchTurn = function() {
-    return this.currentTurn === 'O' ? this.currentTurn = 'X' : this.currentTurn = 'O';
-};
 

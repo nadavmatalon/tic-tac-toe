@@ -16,21 +16,19 @@
                 game.playTurn(selectedSquare);
                 $(this).find('input').val(game.currentTurn);
             }
-
             if (game.gameOver()) {
                 $('.new-game-button').fadeIn(220);
             }
-
             if (game.winningSequence) {
                 $.each(game.winningSequence, function(index, squareIdentifier) {
                     var square = document.getElementById(squareIdentifier);
                     $(square).animate({ color: 'rgb(255, 255, 255)' }, 200);
                 });
             }    
-
         });
 
         $('.new-game-button').on('click', function() {
+            game = new Game();
             var squares = ['#0', '#1', '#2', '#3', '#4', '#5', '#6', '#7', '#8'];
             $.each(squares.concat(['.new-game-button']), function(index, squareValue) {
                 $(squareValue).fadeOut(250, function() {
@@ -40,9 +38,8 @@
                         });
                     });
                 });
-            });
-        
-            game = new Game();
+            });     
         });
     });
 })();
+
