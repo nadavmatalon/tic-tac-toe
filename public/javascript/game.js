@@ -13,13 +13,13 @@ Game.prototype.getRandomTurn = function() {
 };
 
 Game.prototype.playTurn = function(squareIdentifier) {
-	this.registerMove(squareIdentifier);
-	this.checkWinningSequence();
-	this.switchTurn();
+    this.registerMove(squareIdentifier);
+    this.checkWinningSequence();
+    this.switchTurn();
 };
 
 Game.prototype.registerMove = function(squareIdentifier) {
-	this.numberOfMoves += 1;
+    this.numberOfMoves += 1;
     this.grid[squareIdentifier] = this.currentTurn;
 };
 
