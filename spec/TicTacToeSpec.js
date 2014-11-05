@@ -10,7 +10,7 @@ describe("Tic-Tac-Toe::", function() {
 
         it('grid shoud contain nine \'undefined\' placeholders', function() {
             expect(game.grid).toEqual([undefined, undefined, undefined, undefined, undefined, 
-                                    undefined, undefined, undefined, undefined]);
+                                       undefined, undefined, undefined, undefined]);
         });
 
         it('winning sequence parameter should initially be \'undefined\'', function() {
