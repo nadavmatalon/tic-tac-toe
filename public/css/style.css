@@ -28,13 +28,13 @@ input {
 }
 
 .column-container {
+	display: inline-table;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
-	display: block;
 }
 
-.column-container > div {
+.column-container div {
 	display: none;
 	width: 80px;
 	height: 80px;
@@ -43,10 +43,6 @@ input {
 	margin-right: 1px;
 	margin-top: 3px;
 	margin-bottom: 6px;
-}
-
-.column-container {
-	display: inline-table;
 }
 
 .square {
@@ -66,20 +62,20 @@ input {
 	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
-.box:hover {
+.square:hover {
 	background-color: #0044cc;
 	background-position: 0 -15px;
-	-webkit-transition: background-position 0.1s linear;
+	transition: background-position 0.1s linear;
 	-moz-transition: background-position 0.1s linear;
 	-o-transition: background-position 0.1s linear;
-	transition: background-position 0.1s linear;
+	-webkit-transition: background-position 0.1s linear;
+	box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
+	-moz-box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
+	webkit-box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
 	overflow: auto;
     outline: none;
 	text-decoration: none !important;
 	cursor: default;
-	webkit-box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
-	-moz-box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
-	box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
 }
 
 .new-game-button-container {
