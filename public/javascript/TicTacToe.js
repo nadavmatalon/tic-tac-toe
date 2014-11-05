@@ -13,8 +13,8 @@
         $('.square').on('click', function() {
             var selectedSquare = $(this).data('pick');
             if (!game.gameOver() && game.emptySquare(selectedSquare)) {
-                game.playTurn(selectedSquare);
                 $(this).find('input').val(game.currentTurn);
+                game.playTurn(selectedSquare);
             }
             if (game.gameOver()) {
                 $('.new-game-button').fadeIn(220);
