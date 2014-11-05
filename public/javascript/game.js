@@ -13,24 +13,25 @@ Game.prototype.getRandomTurn = function() {
 };
 
 Game.prototype.playTurn = function(squareIdentifier) {
-	this.numberOfMoves += 1;
 	this.registerMove(squareIdentifier);
+	this.checkWinningSequence();
 	this.switchTurn();
 };
 
 Game.prototype.registerMove = function(squareIdentifier) {
+	this.numberOfMoves += 1;
     this.grid[squareIdentifier] = this.currentTurn;
 };
 
 Game.prototype.switchTurn = function() {
-    return this.currentTurn === 'O' ? this.currentTurn = 'X' : this.currentTurn = 'O';
+    this.currentTurn === 'O' ? this.currentTurn = 'X' : this.currentTurn = 'O';
 };
 
 Game.prototype.gameOver = function() {
-    return this.foundWinningSequence() || this.noAvailableMoves();
+    return this.winningSequence !== undefined || this.noAvailableMoves();
 };
 
-Game.prototype.foundWinningSequence = function() {
+Game.prototype.checkWinningSequence = function() {
     var sequences = [
         [0, 1, 2],
         [3, 4, 5],
@@ -42,12 +43,11 @@ Game.prototype.foundWinningSequence = function() {
         [2, 4, 6]
     ];
     for (var i = 0; i < sequences.length; i++) {
-        var squenceValues = (this.grid[sequences[i][0]]) + (this.grid[sequences[i][1]]) + (this.grid[sequences[i][2]]);
-        if ((squenceValues === 'XXX') || (squenceValues === 'OOO')) {
+        var sequenceValues = (this.grid[sequences[i][0]]) + (this.grid[sequences[i][1]]) + (this.grid[sequences[i][2]]);
+        if ((sequenceValues === 'XXX') || (sequenceValues === 'OOO')) {
             this.winningSequence = sequences[i];
         }
     }
-    return this.winningSequence;
 };
 
 Game.prototype.noAvailableMoves = function() {

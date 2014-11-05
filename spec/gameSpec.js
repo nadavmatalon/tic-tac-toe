@@ -14,14 +14,14 @@ describe("Tic-Tac-Toe::", function() {
         });
 
         it('winning sequence parameter should initially be \'undefined\'', function() {
-            expect(game.winningSequence).toEqual(undefined);
+            expect(game.winningSequence).toBe(undefined);
         });
 
        it('winning sequence parameter should contain square identifiers if there is one', function() {
             game.registerMove(0);
             game.registerMove(1);
             game.registerMove(2);
-            game.foundWinningSequence();
+            game.checkWinningSequence();
             expect(game.winningSequence).toEqual([0, 1, 2]);
         });
 
@@ -29,14 +29,16 @@ describe("Tic-Tac-Toe::", function() {
 
     describe('switch turns function', function() {
  
-        it('should return \'O\' if previous turn was \'X\'', function() {
+        it('should set current turn to \'O\' if previous turn was \'X\'', function() {
             game.currentTurn = 'X'
-            expect(game.switchTurn()).toEqual('O');
+            game.switchTurn();
+            expect(game.currentTurn).toEqual('O');
         });
  
-       it('should return \'X\' if previous turn was \'O\'', function() {
+       it('should set current turn to \'X\' if previous turn was \'O\'', function() {
             game.currentTurn = 'O'
-            expect(game.switchTurn()).toEqual('X');
+            game.switchTurn();
+            expect(game.currentTurn).toEqual('X');
         });
  
     });
@@ -62,20 +64,17 @@ describe("Tic-Tac-Toe::", function() {
         });
     });
 
-    describe('found winning sequence function', function() {
+    describe('check winning sequence function', function() {
 
-        it('should initially return false (no winning squence)', function() {
-            expect(game.foundWinningSequence()).toBe(false);
-        });
-
-        it('should return true if there is a winning sequence', function() {
+        it('should register winning sequence if there is one', function() {
            var sequences =  [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
             for (var i=0; i < sequences.length; i++) {
                 game = new Game;
                 for (var j=0; j < 3; j++) {
                     game.registerMove(sequences[i][j]);
+                    game.checkWinningSequence();
                 }
-                expect(game.foundWinningSequence()).toBe(true);
+                expect(game.winningSequence).toEqual(sequences[i]);
             }
         });
 
@@ -96,7 +95,7 @@ describe("Tic-Tac-Toe::", function() {
 
         it('should return true if max number of moves have been registered', function() {
             for (var i=0; i < game.MAX_NUMBER_OF_MOVES; i++) {
-                game.playTurn(i);
+                game.registerMove(i);
             }
             expect(game.gameOver()).toBe(true);
         });        
@@ -107,6 +106,7 @@ describe("Tic-Tac-Toe::", function() {
                 game = new Game;
                 for (var j=0; j < 3; j++) {
                     game.registerMove(sequences[i][j]);
+                    game.checkWinningSequence();
                 }
                 expect(game.gameOver()).toBe(true);
             }
@@ -120,7 +120,7 @@ describe("Tic-Tac-Toe::", function() {
             expect(game.noAvailableMoves()).toBe(false);
         });
 
-       it('should return false if less than the max number of moves were made', function() {
+        it('should return false if less than the max number of moves were made', function() {
             game.numberOfMoves = 8;
             expect(game.noAvailableMoves()).toBe(false);
         });
@@ -145,22 +145,10 @@ describe("Tic-Tac-Toe::", function() {
 
     });
 
-    describe('play turn function', function() {
+    describe('', function() {
 
-        it('can be played on an empty square', function() {
-            game.playTurn(0);
-            expect(game.grid[0]).toEqual(game.currentTurn);
-            expect(game.numberOfMoves).toEqual(1);
-
-        });
-
-        it('cannot be played more than once on a square', function() {
-            game.playTurn(0);
-            var currentSquareValue = game.grid[0];
-            game.updateGameParameters();
-            game.playTurn(0);
-            expect(game.grid[0]).toEqual(currentSquareValue);
-            expect(game.numberOfMoves).toEqual(1);
+        it('', function() {
+ 
         });
 
     });
