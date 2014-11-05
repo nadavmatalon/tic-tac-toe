@@ -6,6 +6,19 @@ describe("Tic-Tac-Toe::", function() {
         game = new Game;
     });
 
+    describe('game parameters', function() {
+
+        it('grid shoud contain nine \'undefined\' placeholders', function() {
+            expect(game.grid).toEqual([undefined, undefined, undefined, undefined, undefined, 
+                                    undefined, undefined, undefined, undefined]);
+        });
+
+        it('winning sequence parameter should initially be \'undefined\'', function() {
+            expect(game.winningSequence).toEqual(undefined);
+        });
+
+    });
+
     describe('switch turns function', function() {
  
         it('should return \'O\' if previous turn was \'X\'', function() {
@@ -20,25 +33,17 @@ describe("Tic-Tac-Toe::", function() {
  
     });
 
-    describe('number of moves count function', function() {
+    describe('number of moves count', function() {
 
         it('should initially be set to 0', function() {
             expect(game.numberOfMoves).toBe(0);
         });
 
-        it('should increment with each move', function() {
-            game.registerMove(0);
+        it('should increment with each turn', function() {
+            game.playTurn(0);
             expect(game.numberOfMoves).toEqual(1);
         });
 
-    });
-
-    describe('make move function', function() {
-
-        it('should register each move on the grid', function() {
-            game.registerMove(0);
-            expect(game.grid[0]).toBe(game.currentTurn);
-        });
     });
 
     describe('register move function', function() {
@@ -75,17 +80,17 @@ describe("Tic-Tac-Toe::", function() {
         });
     });
 
-    describe('update game status function', function() {
+    describe('game over function', function() {
 
-        it('should initially return false (=game not over)', function() {
-            expect(game.updateGameStatus()).toBe(false);
+        it('should initially return false', function() {
+            expect(game.gameOver()).toBe(false);
         });
 
         it('should return true if max number of moves have been registered', function() {
             for (var i=0; i < game.MAX_NUMBER_OF_MOVES; i++) {
-                game.registerMove(i);
+                game.playTurn(i);
             }
-            expect(game.updateGameStatus()).toBe(true);
+            expect(game.gameOver()).toBe(true);
         });        
 
         it('should return true if winning sequence is found', function() {
@@ -95,7 +100,7 @@ describe("Tic-Tac-Toe::", function() {
                 for (var j=0; j < 3; j++) {
                     game.registerMove(sequences[i][j]);
                 }
-                expect(game.updateGameStatus()).toBe(true);
+                expect(game.gameOver()).toBe(true);
             }
         }); 
 
@@ -103,7 +108,7 @@ describe("Tic-Tac-Toe::", function() {
             game.registerMove(0);
             game.registerMove(1);
             game.registerMove(3);
-            expect(game.updateGameStatus()).toBe(false);
+            expect(game.gameOver()).toBe(false);
         }); 
 
     });
@@ -121,19 +126,38 @@ describe("Tic-Tac-Toe::", function() {
 
     });
 
-    describe('square empty function', function() {
+    describe('empty square function', function() {
 
         it('should return true if square is empty', function() {
-            expect(game.squareEmpty(0)).toBe(true);
+            expect(game.emptySquare(0)).toBe(true);
         });
 
         it('should return false if square is not empty', function() {
             game.registerMove(0);
-            expect(game.squareEmpty(0)).toBe(false);
+            expect(game.emptySquare(0)).toBe(false);
+        });
+
+    });
+
+    describe('play turn function', function() {
+
+        it('can be played on an empty square', function() {
+            game.playTurn(0);
+            expect(game.grid[0]).toEqual(game.currentTurn);
+            expect(game.numberOfMoves).toEqual(1);
+
+        });
+
+        it('cannot be played more than once on a square', function() {
+            game.playTurn(0);
+            var currentSquareValue = game.grid[0];
+            game.updateGameParameters();
+            game.playTurn(0);
+            expect(game.grid[0]).toEqual(currentSquareValue);
+            expect(game.numberOfMoves).toEqual(1);
         });
 
     });
 
 });
-
 

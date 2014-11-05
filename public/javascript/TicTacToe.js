@@ -4,7 +4,7 @@ $(document).ready(function() {
     game.setupGame();
     $('.square').on('click', function() {
         game.playTurn($(this).data('pick'));
-        game.updateGameStatus();
+        game.updateGameParameters();
     });
     $('.new-game-button').on('click', function() {   
         game.resetSquaresParameters();
@@ -13,11 +13,10 @@ $(document).ready(function() {
 });
 
 function Game() {
-    this.grid = Array.apply(null, new Array(9));
+    this.grid = Array.apply(undefined, new Array(9));
     this.numberOfMoves = 0;
-    this.currentTurn = this.setRandomFirstTurn();
-    this.winningSequence = null;
-    this.gameOver = false;
+    this.currentTurn = this.getRandomTurn();
+    this.winningSequence = undefined;
 };
 
 Game.prototype.MAX_NUMBER_OF_MOVES = 9;
@@ -30,42 +29,46 @@ Game.prototype.setupGame = function() {
     });
 };
 
-Game.prototype.setRandomFirstTurn = function() {
+Game.prototype.getRandomTurn = function() {
     return ['X', 'O'][Math.floor(Math.random()*['X', 'O'].length)]; 
 };
 
 Game.prototype.playTurn = function(squareIdentifier) {
-    if (!this.gameOver && this.squareEmpty(squareIdentifier)) {
+    if (!this.gameOver() && this.emptySquare(squareIdentifier)) {
+        this.numberOfMoves += 1;
         this.registerMove(squareIdentifier);
-        $('#'+squareIdentifier).val(this.currentTurn);
+        this.updateGridDisplay(squareIdentifier);
     }
 };
 
 Game.prototype.registerMove = function(squareIdentifier) {
     this.grid[squareIdentifier] = this.currentTurn;
-    this.numberOfMoves += 1;
-}
+};
 
-Game.prototype.updateGameStatus = function() {   
-    if (this.foundWinningSequence() || this.noAvailableMoves()) {
+Game.prototype.updateGridDisplay = function(squareIdentifier) {
+        $('#'+squareIdentifier).val(this.currentTurn);
+};
+
+Game.prototype.updateGameParameters = function() {   
+    if (this.gameOver()) {
         this.markWinningSequence(this.winningSequence);
         this.showNewGameButton();
-        return this.gameOver = true;
     } else {
         this.switchTurn();
-        return this.gameOver = false;
     }
+};
+
+Game.prototype.gameOver = function() {
+    return this.foundWinningSequence() || this.noAvailableMoves();
 };
 
 Game.prototype.foundWinningSequence = function() {
     var sequences =  [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
     for (var i=0; i < sequences.length; i++) {
         var squenceValues = (this.grid[sequences[i][0]]) + (this.grid[sequences[i][1]]) + (this.grid[sequences[i][2]]);
-        if ((squenceValues == 'XXX') || (squenceValues == 'OOO')) {
-            this.winningSequence = sequences[i];
-        }
+        if ((squenceValues == 'XXX') || (squenceValues == 'OOO')) { this.winningSequence = sequences[i]; }
     }
-    return this.winningSequence != null;
+    return this.winningSequence != undefined;
 };
 
 Game.prototype.markWinningSequence = function(squareIdentifiers) {
@@ -85,8 +88,8 @@ Game.prototype.showNewGameButton = function() {
     $('.new-game-button').fadeIn(220);
 };
 
-Game.prototype.squareEmpty = function (squareIdentifier) {
-    return this.grid[squareIdentifier] == null;
+Game.prototype.emptySquare = function (squareIdentifier) {
+    return this.grid[squareIdentifier] == undefined;
 };
 
 Game.prototype.switchTurn = function() {
@@ -95,8 +98,8 @@ Game.prototype.switchTurn = function() {
 
 Game.prototype.resetSquaresParameters = function() {
     var squares = ['#0', '#1', '#2', '#3', '#4', '#5', '#6', '#7', '#8'];
-    $.each(squares.concat(['.new-game-button']), function(index, boxValue) {
-        $(boxValue).fadeOut(250, function() {
+    $.each(squares.concat(['.new-game-button']), function(index, squareValue) {
+        $(squareValue).fadeOut(250, function() {
             $.each(squares, function(index, square) {
                 $(square).val('').show(function() {
                     $('.square').children().css('color', 'rgb(0, 0, 0');
