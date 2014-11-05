@@ -46,7 +46,7 @@ Game.prototype.registerMove = function(squareIdentifier) {
 };
 
 Game.prototype.updateGridDisplay = function(squareIdentifier) {
-        $('#'+squareIdentifier).val(this.currentTurn);
+    $('#'+squareIdentifier).val(this.currentTurn);
 };
 
 Game.prototype.updateGameParameters = function() {   
