@@ -7,7 +7,7 @@
 * [App Screenshot](#app-screenshot)
 * [General Description](#general-description)
 * [See it Live on Github](#see-it-live-on-github)
-* [How to Run the Game Locally](#how-to-run-the-game-locally)
+* [How to Install and Run the Game Locally](#how-to-install-and-run-the-game-locally)
 * [Browsers](#browsers)
 * [Testing](#testing)
 * [License](#license)
@@ -28,13 +28,22 @@
 
 ##General Description
 
-This app was created as an exercise in buiding a 
-[JavaScript](http://en.wikipedia.org/wiki/JavaScript) web application featuring the 
-famous game of [Tic-Tac-Toe](http://en.wikipedia.org/wiki/Tic-tac-toe).
+This web-app was written following the course at 
+[Makers Academy](http://www.makersacademy.com/) 
+as an exercise in buiding a  
+[JavaScript](http://en.wikipedia.org/wiki/JavaScript) web app, 
+using [jQuery](http://jquery.com) functionality and 
+[TDD](http://en.wikipedia.org/wiki/Test-driven_development) 
+methodology (tests were written with 
+[Jasmine](http://jasmine.github.io/2.0/introduction.html)). 
 
-It uses [jQuery](http://jquery.com) functionality and was created according to 
-[TDD](http://en.wikipedia.org/wiki/Test-driven_development) methodology 
-(test were written with [Jasmine](http://jasmine.github.io/2.0/introduction.html)). 
+It basically does what it says on the tin, namely: implements the game of 
+Tic-Tac-Toe. 
+
+To play simply click on one of the 9 squares. The starting turn ('X' or 'O') 
+is allocated randomly by the app on the initialization of each new game. When 
+a winning sequence is reached or all the squares are full the game is over 
+and a new game can be started.
 
 
 ##See it Live on Github
@@ -46,9 +55,9 @@ A live version of the game can be found (and played!) at:
 (Please see notes about browser compatibility below).
 
 
-##How to Run the Game Locally
+##How to Install and Run the Game Locally
 
-Clone the repo to a local folder and run:
+Clone the repo to a local folder and run the following commands in terminal:
 
 ```bash
 $ cd tic-tac-toe
