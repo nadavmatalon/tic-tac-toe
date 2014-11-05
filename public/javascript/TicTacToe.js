@@ -3,10 +3,12 @@ $(document).ready(function() {
     game = new Game;
     game.setupGame();
     $('.square').on('click', function() {
-        game.playGame($(this).data('pick'));
+        game.playTurn($(this).data('pick'));
+        game.updateGameStatus();
     });
     $('.new-game-button').on('click', function() {   
-        game.newGame();
+        game.resetSquaresParameters();
+        game = new Game;
     });
 });
 
@@ -28,16 +30,15 @@ Game.prototype.setupGame = function() {
     });
 };
 
-Game.prototype.playGame = function(squareIdentifier) {
+Game.prototype.setRandomFirstTurn = function() {
+    return ['X', 'O'][Math.floor(Math.random()*['X', 'O'].length)]; 
+};
+
+Game.prototype.playTurn = function(squareIdentifier) {
     if (!this.gameOver && this.squareEmpty(squareIdentifier)) {
         this.registerMove(squareIdentifier);
         $('#'+squareIdentifier).val(this.currentTurn);
-        this.checkGameOver();
     }
-};
-
-Game.prototype.setRandomFirstTurn = function() {
-    return ['X', 'O'][Math.floor(Math.random()*['X', 'O'].length)]; 
 };
 
 Game.prototype.registerMove = function(squareIdentifier) {
@@ -45,7 +46,7 @@ Game.prototype.registerMove = function(squareIdentifier) {
     this.numberOfMoves += 1;
 }
 
-Game.prototype.checkGameOver = function() {   
+Game.prototype.updateGameStatus = function() {   
     if (this.foundWinningSequence() || this.noAvailableMoves()) {
         this.markWinningSequence(this.winningSequence);
         this.showNewGameButton();
@@ -90,11 +91,6 @@ Game.prototype.squareEmpty = function (squareIdentifier) {
 
 Game.prototype.switchTurn = function() {
     return this.currentTurn == 'O' ? this.currentTurn = 'X' : this.currentTurn = 'O';
-};
-
-Game.prototype.newGame = function() {
-    this.resetSquaresParameters();
-    return game = new Game;
 };
 
 Game.prototype.resetSquaresParameters = function() {

@@ -20,7 +20,7 @@ describe("Tic-Tac-Toe::", function() {
  
     });
 
-    describe('move count function', function() {
+    describe('number of moves count function', function() {
 
         it('should initially be set to 0', function() {
             expect(game.numberOfMoves).toBe(0);
@@ -31,6 +31,14 @@ describe("Tic-Tac-Toe::", function() {
             expect(game.numberOfMoves).toEqual(1);
         });
 
+    });
+
+    describe('make move function', function() {
+
+        it('should register each move on the grid', function() {
+            game.registerMove(0);
+            expect(game.grid[0]).toBe(game.currentTurn);
+        });
     });
 
     describe('register move function', function() {
@@ -67,17 +75,17 @@ describe("Tic-Tac-Toe::", function() {
         });
     });
 
-    describe('check game over function', function() {
+    describe('update game status function', function() {
 
-        it('should initially return false', function() {
-            expect(game.checkGameOver()).toBe(false);
+        it('should initially return false (=game not over)', function() {
+            expect(game.updateGameStatus()).toBe(false);
         });
 
         it('should return true if max number of moves have been registered', function() {
             for (var i=0; i < game.MAX_NUMBER_OF_MOVES; i++) {
                 game.registerMove(i);
             }
-            expect(game.checkGameOver()).toBe(true);
+            expect(game.updateGameStatus()).toBe(true);
         });        
 
         it('should return true if winning sequence is found', function() {
@@ -87,7 +95,7 @@ describe("Tic-Tac-Toe::", function() {
                 for (var j=0; j < 3; j++) {
                     game.registerMove(sequences[i][j]);
                 }
-                expect(game.checkGameOver()).toBe(true);
+                expect(game.updateGameStatus()).toBe(true);
             }
         }); 
 
@@ -95,7 +103,7 @@ describe("Tic-Tac-Toe::", function() {
             game.registerMove(0);
             game.registerMove(1);
             game.registerMove(3);
-            expect(game.checkGameOver()).toBe(false);
+            expect(game.updateGameStatus()).toBe(false);
         }); 
 
     });
@@ -125,7 +133,7 @@ describe("Tic-Tac-Toe::", function() {
         });
 
     });
-    
+
 });
 
 
