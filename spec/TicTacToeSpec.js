@@ -3,260 +3,161 @@ describe("Tic-Tac-Toe::", function() {
     var game;
 
     beforeEach(function() {
-        game = new Game();
+        game = new Game;
     });
 
-    describe('Check Row function', function() {
+    describe('game parameters', function() {
 
-        it('should initialliy return false (no winning squence)', function() {
-            expect(game.checkFirstRow()).toBe(false);
-            expect(game.checkSecondRow()).toBe(false);
-            expect(game.checkThirdRow()).toBe(false);
+        it('grid shoud contain nine \'undefined\' placeholders', function() {
+            expect(game.grid).toEqual([undefined, undefined, undefined, undefined, undefined, 
+                                    undefined, undefined, undefined, undefined]);
         });
 
-        it('should return false if only one box is ticked', function() {
-            game.boxOne = 'X';
-            game.boxFour = 'X';
-            game.boxSeven = 'X';
-            expect(game.checkFirstRow()).toBe(false);
-            expect(game.checkSecondRow()).toBe(false);
-            expect(game.checkThirdRow()).toBe(false);
+        it('winning sequence parameter should initially be \'undefined\'', function() {
+            expect(game.winningSequence).toEqual(undefined);
         });
 
-        it('should return false if only two boxes are ticked', function() {
-            game.boxOne = 'X';
-            game.boxTwo = 'X';
-            game.boxFour = 'X';
-            game.boxFive = 'X';
-            game.boxSeven = 'X';
-            game.boxEight = 'X';
-            expect(game.checkFirstRow()).toBe(false);
-            expect(game.checkSecondRow()).toBe(false);
-            expect(game.checkThirdRow()).toBe(false);
+    });
+
+    describe('switch turns function', function() {
+ 
+        it('should return \'O\' if previous turn was \'X\'', function() {
+            game.currentTurn = 'X'
+            expect(game.switchTurn()).toEqual('O');
+        });
+ 
+       it('should return \'X\' if previous turn was \'O\'', function() {
+            game.currentTurn = 'O'
+            expect(game.switchTurn()).toEqual('X');
+        });
+ 
+    });
+
+    describe('number of moves count', function() {
+
+        it('should initially be set to 0', function() {
+            expect(game.numberOfMoves).toBe(0);
         });
 
-        it('should return false if three boxes are ticked but with different signs', function() {
-            game.boxOne = 'X';
-            game.boxTwo = 'X';
-            game.boxThree = 'O';
-            game.boxFour = 'X';
-            game.boxFive = 'X';
-            game.boxSix = 'O';
-            game.boxSeven = 'X';
-            game.boxEight = 'X';
-            game.boxNine = 'O';
-            expect(game.checkFirstRow()).toBe(false);
-            expect(game.checkSecondRow()).toBe(false);
-            expect(game.checkThirdRow()).toBe(false);
+        it('should increment with each turn', function() {
+            game.playTurn(0);
+            expect(game.numberOfMoves).toEqual(1);
         });
 
-        it('should return true if three boxes are ticked with same sign', function() {
-            game.boxOne = 'X';
-            game.boxTwo = 'X';
-            game.boxThree = 'X';
-            game.boxFour = 'X';
-            game.boxFive = 'X';
-            game.boxSix = 'X';
-            game.boxSeven = 'X';
-            game.boxEight = 'X';
-            game.boxNine = 'X';
-            expect(game.checkFirstRow()).toBe(true);
-            expect(game.checkSecondRow()).toBe(true);
-            expect(game.checkThirdRow()).toBe(true);
+    });
+
+    describe('register move function', function() {
+
+        it('should register each move on the grid', function() {
+            game.registerMove(0);
+            expect(game.grid[0]).toBe(game.currentTurn);
         });
     });
 
-    describe('Check Rows function', function() {
+    describe('found winning sequence function', function() {
 
-        it('should initialliy return false if no winning squence', function() {
-            expect(game.checkRows()).toBe(false);
+        it('should initially return false (no winning squence)', function() {
+            expect(game.foundWinningSequence()).toBe(false);
         });
 
-       it('should return true if there is a winning squence', function() {
-            game.boxOne = 'X';
-            game.boxTwo = 'X';
-            game.boxThree = 'X';
-            expect(game.checkRows()).toBe(true);
-        });
-    });
-
-    describe('Check Column function', function() {
-
-        it('should initialliy return false (no winning squence)', function() {
-            expect(game.checkFirstColumn()).toBe(false);
-            expect(game.checkSecondColumn()).toBe(false);
-            expect(game.checkThirdColumn()).toBe(false);
+        it('should return true if there is a winning sequence', function() {
+           var sequences =  [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+            for (var i=0; i < sequences.length; i++) {
+                game = new Game;
+                for (var j=0; j < 3; j++) {
+                    game.registerMove(sequences[i][j]);
+                }
+                expect(game.foundWinningSequence()).toBe(true);
+            }
         });
 
-        it('should return false if only one box is ticked', function() {
-            game.boxOne = 'X';
-            game.Two = 'X';
-            game.boxThree = 'X';
-            expect(game.checkFirstColumn()).toBe(false);
-            expect(game.checkSecondColumn()).toBe(false);
-            expect(game.checkThirdColumn()).toBe(false);
-         });
-
-        it('should return false if only two boxes are ticked', function() {
-            game.boxOne = 'X';
-            game.boxFour = 'X';
-            game.boxTwo = 'X';
-            game.boxFive = 'X';
-            game.boxThree = 'X';
-            game.boxSix = 'X';
-            expect(game.checkFirstColumn()).toBe(false);
-            expect(game.checkSecondColumn()).toBe(false);
-            expect(game.checkThirdColumn()).toBe(false);
-        });
-
-        it('should return false if three boxes are ticked but with different signs', function() {
-            game.boxOne = 'X';
-            game.boxFour = 'X';
-            game.boxSeven = 'O';
-            game.boxTwo = 'X';
-            game.boxFive = 'X';
-            game.boxEight = 'O';
-            game.boxThree = 'X';
-            game.boxSix = 'X';
-            game.boxNine = 'O';
-            expect(game.checkFirstColumn()).toBe(false);
-            expect(game.checkSecondColumn()).toBe(false);
-            expect(game.checkThirdColumn()).toBe(false);
-        });
-
-        it('should return true if three boxes are ticked with same sign', function() {
-            game.boxOne = 'X';
-            game.boxFour = 'X';
-            game.boxSeven = 'X';
-            game.boxTwo = 'X';
-            game.boxFive = 'X';
-            game.boxEight = 'X';
-            game.boxThree = 'X';
-            game.boxSix = 'X';
-            game.boxNine = 'X';
-            expect(game.checkFirstColumn()).toBe(true);
-            expect(game.checkSecondColumn()).toBe(true);
-            expect(game.checkThirdColumn()).toBe(true);
+        it('should register the winning sequence in the game\'s attributes if it finds one', function() {
+            game.registerMove(0);
+            game.registerMove(1);
+            game.registerMove(2);
+            game.foundWinningSequence();
+            expect(game.winningSequence).toEqual([0, 1, 2]);
         });
     });
 
-    describe('Check Columns function', function() {
+    describe('game over function', function() {
 
-        it('should initialliy return false (no winning squence)', function() {
-            expect(game.checkColumns()).toBe(false);
+        it('should initially return false', function() {
+            expect(game.gameOver()).toBe(false);
         });
 
-        it('should return true if there is a winning squence', function() {
-            game.boxOne = 'X';
-            game.boxFour = 'X';
-            game.boxSeven = 'X';
-            expect(game.checkColumns()).toBe(true);
-        });
+        it('should return true if max number of moves have been registered', function() {
+            for (var i=0; i < game.MAX_NUMBER_OF_MOVES; i++) {
+                game.playTurn(i);
+            }
+            expect(game.gameOver()).toBe(true);
+        });        
+
+        it('should return true if winning sequence is found', function() {
+            var sequences =  [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+            for (var i=0; i < sequences.length; i++) {
+                game = new Game;
+                for (var j=0; j < 3; j++) {
+                    game.registerMove(sequences[i][j]);
+                }
+                expect(game.gameOver()).toBe(true);
+            }
+        }); 
+
+        it('should return false if winning sequence is not found', function() {
+            game.registerMove(0);
+            game.registerMove(1);
+            game.registerMove(3);
+            expect(game.gameOver()).toBe(false);
+        }); 
+
     });
 
-    describe('Check Diagonal', function() {
+    describe('no available moves function', function() {
 
-        it('should initialliy return false (no winning squence)', function() {
-            expect(game.checkFirstDiagonal()).toBe(false);
-            expect(game.checkSecondDiagonal()).toBe(false);
+        it('should initially return false', function() {
+            expect(game.noAvailableMoves()).toBe(false);
         });
 
-        it('should return false if only one box is ticked', function() {
-            game.boxFive = 'X';
-            expect(game.checkFirstDiagonal()).toBe(false);
-            expect(game.checkSecondDiagonal()).toBe(false);
-         });
-
-        it('should return false if only two boxes are ticked', function() {
-            game.boxOne = 'X';
-            game.boxThree = 'X';
-            game.boxFive = 'X';
-            expect(game.checkFirstDiagonal()).toBe(false);
-            expect(game.checkSecondDiagonal()).toBe(false);
+        it('should return true if there are no more available moves', function() {
+            game.numberOfMoves = 9;
+            expect(game.noAvailableMoves()).toBe(true);
         });
 
-        it('should return false if three boxes are ticked but with different signs', function() {
-            game.boxOne = 'X';
-            game.boxThree = 'X';
-            game.boxFive = 'X';
-            game.boxSeven = 'O';
-            game.boxNine = 'O';
-            expect(game.checkFirstDiagonal()).toBe(false);
-            expect(game.checkSecondDiagonal()).toBe(false);
-       });
-
-        it('should return true if three boxes are ticked with same sign', function() {
-            game.boxOne = 'X';
-            game.boxThree = 'X';
-            game.boxFive = 'X';
-            game.boxSeven = 'X';
-            game.boxNine = 'X';
-            expect(game.checkFirstDiagonal()).toBe(true);
-            expect(game.checkSecondDiagonal()).toBe(true);
-        });
     });
 
-    describe('Check Diagonals', function() {
+    describe('empty square function', function() {
 
-        it('should initialliy return false (no winning squence)', function() {
-            expect(game.checkDiagonals()).toBe(false);
+        it('should return true if square is empty', function() {
+            expect(game.emptySquare(0)).toBe(true);
         });
 
-        it('should return true if there is a winning squence', function() {
-            game.boxOne = 'X';
-            game.boxFive = 'X';
-            game.boxNine = 'X';
-            expect(game.checkDiagonals()).toBe(true);
+        it('should return false if square is not empty', function() {
+            game.registerMove(0);
+            expect(game.emptySquare(0)).toBe(false);
         });
+
     });
 
-   describe('Check Winner function', function() {
+    describe('play turn function', function() {
 
-        it('should initialliy return false (no winner)', function() {
-            expect(game.checkWinner()).toBe(false);
+        it('can be played on an empty square', function() {
+            game.playTurn(0);
+            expect(game.grid[0]).toEqual(game.currentTurn);
+            expect(game.numberOfMoves).toEqual(1);
+
         });
 
-        it('should return true if there is a winning squence', function() {
-            game.boxOne = 'X';
-            game.boxFive = 'X';
-            game.boxNine = 'X';
-            expect(game.checkWinner()).toBe(true);
+        it('cannot be played more than once on a square', function() {
+            game.playTurn(0);
+            var currentSquareValue = game.grid[0];
+            game.updateGameParameters();
+            game.playTurn(0);
+            expect(game.grid[0]).toEqual(currentSquareValue);
+            expect(game.numberOfMoves).toEqual(1);
         });
 
-       it('should return false if less than nine plays have been made', function() {
-            game.numberOfPlays = 8;
-            expect(game.checkWinner()).toBe(false);
-        });
-
-        it('should return true if nine plays have been made', function() {
-            game.numberOfPlays = 9;
-            expect(game.checkWinner()).toBe(true);
-        });
     });
 
-    describe('current turn', function() {
-
-        it('should initialliy be set to X', function() {
-            game.currentTurn = game.setCurrentTurn();
-            expect(game.currentTurn).toBe('X');
-        });
-    });
-
-    describe('switch turn', function() {
-
-        it('should return O if previous turn was X', function() {
-            game.currentTurn = game.setCurrentTurn();
-            expect(game.currentTurn).toBe('O');
-        });
-    });
-
-    describe('switch turn again', function() {
-        it('should return X if previous turn was O', function() {
-            game.currentTurn = game.setCurrentTurn();
-            game.currentTurn = game.setCurrentTurn();
-            expect(game.setCurrentTurn()).toEqual('X');
-        });
-    });
-    
 });
 

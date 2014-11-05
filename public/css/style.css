@@ -14,10 +14,9 @@ input {
 	width: 46px;
 	height: 60px;
 	margin-top: 3px;
-	color: black;
+	color: rgb(0, 0, 1);
 	text-decoration: none !important;
 	outline: none;
-	color: black;
 }
 
 .title {
@@ -28,23 +27,14 @@ input {
 	display: none;
 }
 
-
-.row-container {
+.column-container {
+	display: inline-table;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
-	display: block;
 }
 
-.button-cover {
-	display: none;
-}
-
-.row-container {
-	display: inline-table;
-}
-
-.row-container > div {
+.column-container div {
 	display: none;
 	width: 80px;
 	height: 80px;
@@ -55,7 +45,7 @@ input {
 	margin-bottom: 6px;
 }
 
-.button {
+.square {
 	background-color: #006dcc;
 	background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
@@ -72,20 +62,20 @@ input {
 	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
-.button:hover {
+.square:hover {
 	background-color: #0044cc;
 	background-position: 0 -15px;
-	-webkit-transition: background-position 0.1s linear;
+	transition: background-position 0.1s linear;
 	-moz-transition: background-position 0.1s linear;
 	-o-transition: background-position 0.1s linear;
-	transition: background-position 0.1s linear;
+	-webkit-transition: background-position 0.1s linear;
+	box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
+	-moz-box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
+	webkit-box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
 	overflow: auto;
     outline: none;
 	text-decoration: none !important;
 	cursor: default;
-	webkit-box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
-	-moz-box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
-	box-shadow: inset 0px 0px 12px -3px rgba(0,0,0,0.20);
 }
 
 .new-game-button-container {
@@ -101,25 +91,17 @@ input {
 	background-image: -o-linear-gradient(top, #0088cc, #0044cc);
 	background-image: linear-gradient(to bottom, #0088cc, #0044cc);
 	background-repeat: repeat-x;
-	border-bottom-color: #a2a2a2;
-	border-color: #0044cc #0044cc #002a80;
 	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-	border-color: #c5c5c5;
-	border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
-	border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-	border-top-width: 2px;
-	border-right-width: 2px;
-	border-bottom-width: 2px;
-	border-left-width: 2px;
-	border-top-style: outset;
-	border-right-style: outset;
-	border-bottom-style: outset;
-	border-left-style: outset;
+	border-width: 2px;
+	border-style: outset;
 	border: 1px solid #bbbbbb;
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
+   	-webkit-box-shadow: none;
+    -moz-box-shadow: none;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 -1px 0 rgba(255, 255, 255, 0.3) inset;
+	box-sizing: border-box;
 	color: #ffffff;
 	cursor: default;
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
@@ -127,37 +109,26 @@ input {
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
 	font: -webkit-small-control;
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif font-size: 14px;
-	line-height: 20px;
-	margin-bottom: 0;
-	padding: 4px 12px;
-	text-align: center;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-	vertical-align: middle;
-	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	font-size: 13px;
+	letter-spacing: 0.4px;
+	line-height: normal;
+	margin: 0px;
+	overflow: auto;
+    outline: none;
 	padding-top: 7px;
 	padding-right: 14px;
 	padding-bottom: 9px;
 	padding-left: 14px;
-	box-sizing: border-box;
-	margin-top: 0em;
-	margin-right: 0em;
-	margin-bottom: 0em;
-	margin-left: 0em;
-	letter-spacing: 0.4px;
-	word-spacing: normal;
-	line-height: normal;
-	text-transform: none;
+	text-align: center;
+ 	text-decoration: none !important;
 	text-indent: 0px;
+	text-transform: none;
 	text-shadow: none;
-	text-align: start;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+	vertical-align: middle;
+	word-spacing: normal;
 	-webkit-writing-mode: horizontal-tb !important;
-	font-size: 13px;
-	overflow: auto;
-    outline: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1), 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 -1px 0 rgba(255, 255, 255, 0.3) inset;
-	text-decoration: none !important;
 }
 
 .new-game-button:hover {

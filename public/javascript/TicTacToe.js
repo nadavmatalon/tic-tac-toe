@@ -1,205 +1,111 @@
 
-function letsPlay() {
-    $(document).ready(function() {
-        game = new Game;
-        game.setUp();
-        game.play();
-        game.newGame();
+$(document).ready(function() {
+    game = new Game;
+    game.setupGame();
+    $('.square').on('click', function() {
+        game.playTurn($(this).data('pick'));
+        game.updateGameParameters();
     });
-};
+    $('.new-game-button').on('click', function() {   
+        game.resetSquaresParameters();
+        game = new Game;
+    });
+});
 
 function Game() {
-
+    this.grid = Array.apply(undefined, new Array(9));
+    this.numberOfMoves = 0;
+    this.currentTurn = this.getRandomTurn();
+    this.winningSequence = undefined;
 };
 
-Game.prototype.currentTurn = 'O';
-Game.prototype.gameOver = false;
-Game.prototype.numberOfPlays = 0;
+Game.prototype.MAX_NUMBER_OF_MOVES = 9;
 
-Game.prototype.boxOne = '';
-Game.prototype.boxTwo = '';
-Game.prototype.boxThree = '';
-Game.prototype.boxFour = '';
-Game.prototype.boxFive = '';
-Game.prototype.boxSix = '';
-Game.prototype.boxSeven = '';
-Game.prototype.boxEight = '';
-Game.prototype.boxNine = '';
-
-Game.prototype.setUp = function() {
+Game.prototype.setupGame = function() {
     $('.title').fadeIn(400, function() {
-        $('.button').each(function(i) {
-            $(this).delay(i*200).fadeIn(220);
+        $('.square').each(function(square) {
+            $(this).delay(square*200).fadeIn(220);
         });
     });
 };
 
-Game.prototype.play = function() {
-    $('.button').on('click', function() {
-        if (!game.gameOver) {
-            if ($(this).find(':first-child').val() === '') {
-                game.currentTurn = game.setCurrentTurn();
-                $(this).find(':first-child').val(game.currentTurn);                
-                game.boxOne = $("#box-one").val();
-                game.boxTwo = $("#box-two").val();
-                game.boxThree = $("#box-three").val();
-                game.boxFour = $("#box-four").val();
-                game.boxFive = $("#box-five").val();
-                game.boxSix = $("#box-six").val();
-                game.boxSeven = $("#box-seven").val();
-                game.boxEight = $("#box-eight").val();
-                game.boxNine = $("#box-nine").val();
-                game.numberOfPlays += 1;
-                game.gameOver = game.checkWinner();
-                if (game.gameOver) console.log("game over");
-            };
-        };
-    });
+Game.prototype.getRandomTurn = function() {
+    return ['X', 'O'][Math.floor(Math.random()*['X', 'O'].length)]; 
 };
 
-Game.prototype.setCurrentTurn = function() {
-    return (game.currentTurn === 'O') ? (game.currentTurn = 'X') : (game.currentTurn = 'O');
- };
+Game.prototype.playTurn = function(squareIdentifier) {
+    if (!this.gameOver() && this.emptySquare(squareIdentifier)) {
+        this.numberOfMoves += 1;
+        this.registerMove(squareIdentifier);
+        this.updateGridDisplay(squareIdentifier);
+    }
+};
 
-Game.prototype.checkWinner = function() {   
-    if (((this.checkRows() || this.checkColumns()) || this.checkDiagonals()) || (this.numberOfPlays === 9)) {
-        $('.new-game-button').fadeIn(220);
-        return true;
+Game.prototype.registerMove = function(squareIdentifier) {
+    this.grid[squareIdentifier] = this.currentTurn;
+};
+
+Game.prototype.updateGridDisplay = function(squareIdentifier) {
+        $('#'+squareIdentifier).val(this.currentTurn);
+};
+
+Game.prototype.updateGameParameters = function() {   
+    if (this.gameOver()) {
+        this.markWinningSequence(this.winningSequence);
+        this.showNewGameButton();
     } else {
-        return false;
-    };
+        this.switchTurn();
+    }
 };
 
-Game.prototype.checkRows = function() {   
-    return ((this.checkFirstRow() || this.checkSecondRow()) || this.checkThirdRow());
+Game.prototype.gameOver = function() {
+    return this.foundWinningSequence() || this.noAvailableMoves();
 };
 
-Game.prototype.checkFirstRow = function() {
-    if (((this.boxOne === 'X') && (this.boxTwo === 'X') && (this.boxThree === 'X')) ||
-       ((this.boxOne === 'O') && (this.boxTwo === 'O') && (this.boxThree === 'O'))) {
-        $.each(['#box-one', '#box-two', '#box-three'], function(i, el) {
-            $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
+Game.prototype.foundWinningSequence = function() {
+    var sequences =  [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+    for (var i=0; i < sequences.length; i++) {
+        var squenceValues = (this.grid[sequences[i][0]]) + (this.grid[sequences[i][1]]) + (this.grid[sequences[i][2]]);
+        if ((squenceValues == 'XXX') || (squenceValues == 'OOO')) { this.winningSequence = sequences[i]; }
+    }
+    return this.winningSequence != undefined;
+};
+
+Game.prototype.markWinningSequence = function(squareIdentifiers) {
+    if (this.winningSequence) {
+        $.each(squareIdentifiers, function(index, squareIdentifier) {
+            square = document.getElementById(squareIdentifier);
+            $(square).animate({ color: 'rgb(255, 255, 255)' }, 200);
         });
-        return true
-    } else {
-        return false
-    };
+    }
 };
 
-Game.prototype.checkSecondRow = function() {
-  if (((this.boxFour === 'X') && (this.boxFive === 'X') && (this.boxSix === 'X')) || 
-      ((this.boxFour === 'O') && (this.boxFive === 'O') && (this.boxSix === 'O'))) {
-        $.each(['#box-four', '#box-five', '#box-six'], function(i, el) {
-            $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
-        });
-        return true
-    } else {
-        return false
-    };
+Game.prototype.noAvailableMoves = function() {
+    return this.numberOfMoves === game.MAX_NUMBER_OF_MOVES;
 };
 
-Game.prototype.checkThirdRow = function() {
-    if (((this.boxSeven === 'X') && (this.boxEight === 'X') && (this.boxNine === 'X')) || 
-       ((this.boxSeven === 'O') && (this.boxEight === 'O') && (this.boxNine === 'O'))) {
-        $.each(['#box-seven', '#box-eight', '#box-nine'], function(i, el) {
-            $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
-        });
-        return true
-    } else {
-        return false
-    };
+Game.prototype.showNewGameButton = function() {
+    $('.new-game-button').fadeIn(220);
 };
 
-Game.prototype.checkColumns = function() {   
-    return ((this.checkFirstColumn() || this.checkSecondColumn()) || this.checkThirdColumn());
+Game.prototype.emptySquare = function (squareIdentifier) {
+    return this.grid[squareIdentifier] == undefined;
 };
 
-Game.prototype.checkFirstColumn = function() {
-   if (((this.boxOne === 'X') && (this.boxFour === 'X') && (this.boxSeven === 'X')) ||
-       ((this.boxOne === 'O') && (this.boxFour === 'O') && (this.boxSeven === 'O'))) {
-         $.each(['#box-one', '#box-four', '#box-seven'], function(i, el) {
-            $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
-        });
-         return true
-    } else {
-        return false
-    };
+Game.prototype.switchTurn = function() {
+    return this.currentTurn == 'O' ? this.currentTurn = 'X' : this.currentTurn = 'O';
 };
 
-Game.prototype.checkSecondColumn = function() {
-  if (((this.boxTwo === 'X') && (this.boxFive === 'X') && (this.boxEight === 'X')) ||
-       ((this.boxTwo === 'O') && (this.boxFive === 'O') && (this.boxEight === 'O'))) {
-         $.each(['#box-two', '#box-five', '#box-eight'], function(i, el) {
-            $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
-        });
-        return true
-    } else {
-        return false
-    };
-};
-
-Game.prototype.checkThirdColumn = function() {
-  if (((this.boxThree === 'X') && (this.boxSix === 'X') && (this.boxNine === 'X')) ||
-       ((this.boxThree === 'O') && (this.boxSix === 'O') && (this.boxNine === 'O'))) {
-         $.each(['#box-three', '#box-six', '#box-nine'], function(i, el) {
-            $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
-        });
-        return true
-    } else {
-        return false
-    };
-};
-
-Game.prototype.checkDiagonals = function() {   
-    return (this.checkFirstDiagonal() || this.checkSecondDiagonal());
-};
-
-Game.prototype.checkFirstDiagonal = function() {
-   if (((this.boxOne === 'X') && (this.boxFive === 'X') && (this.boxNine === 'X')) ||
-       ((this.boxOne === 'O') && (this.boxFive === 'O') && (this.boxNine === 'O'))) {
-         $.each(['#box-one', '#box-five', '#box-nine'], function(i, el) {
-            $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
-        });
-         return true
-    } else {
-        return false
-    };
-};
-
-Game.prototype.checkSecondDiagonal = function() {
-  if (((this.boxThree === 'X') && (this.boxFive === 'X') && (this.boxSeven === 'X')) ||
-       ((this.boxThree === 'O') && (this.boxFive === 'O') && (this.boxSeven === 'O'))) {
-          $.each(['#box-three', '#box-five', '#box-seven'], function(i, el) {
-            $(el).animate({ color: "rgb(255, 255, 255)" }, 200);
-        });
-       return true
-    } else {
-        return false
-    };
-};
-
-Game.prototype.newGame = function() {
-    $('.new-game-button').on('click', function() {
-        $.each(['#box-one', '#box-two', '#box-three', '#box-four',
-            '#box-five', '#box-six', '#box-seven', '#box-eight', '#box-nine', 
-            '.new-game-button'], function(i, el) {
-            $(el).fadeOut(250, function() {
-                $('.button').children().val('');
-                $.each(['#box-one', '#box-two', '#box-three', '#box-four',
-                '#box-five', '#box-six', '#box-seven', '#box-eight', '#box-nine'], 
-                function(i, el) {
-                    $(el).show(function() {
-                        $('.button').children().css('color', 'rgb(0, 0, 0');
-                    });
+Game.prototype.resetSquaresParameters = function() {
+    var squares = ['#0', '#1', '#2', '#3', '#4', '#5', '#6', '#7', '#8'];
+    $.each(squares.concat(['.new-game-button']), function(index, squareValue) {
+        $(squareValue).fadeOut(250, function() {
+            $.each(squares, function(index, square) {
+                $(square).val('').show(function() {
+                    $('.square').children().css('color', 'rgb(0, 0, 0');
                 });
             });
         });
-        game.currentTurn = 'O';
-        game.numberOfPlays = 0;
-        game.gameOver = false;
-        console.log("new game");
     });
 };
-
-letsPlay();
 
