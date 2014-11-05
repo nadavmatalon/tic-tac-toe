@@ -1,5 +1,7 @@
 #Tic • Tac • Toe
 
+[![Code Climate](https://codeclimate.com/github/nadavmatalon/tic-tac-toe/badges/gpa.svg)](https://codeclimate.com/github/nadavmatalon/tic-tac-toe)
+
 ##Table of Contents
 
 * [App Screenshot](#app-screenshot)
