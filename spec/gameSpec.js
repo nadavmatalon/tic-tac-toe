@@ -24,7 +24,6 @@ describe("Tic-Tac-Toe::", function() {
             game.checkWinningSequence();
             expect(game.winningSequence).toEqual([0, 1, 2]);
         });
-
     });
 
     describe('switch turns function', function() {
@@ -40,7 +39,6 @@ describe("Tic-Tac-Toe::", function() {
             game.switchTurn();
             expect(game.currentTurn).toEqual('X');
         });
- 
     });
 
     describe('number of moves count', function() {
@@ -53,7 +51,6 @@ describe("Tic-Tac-Toe::", function() {
             game.playTurn(0);
             expect(game.numberOfMoves).toEqual(1);
         });
-
     });
 
     describe('register move function', function() {
@@ -78,7 +75,6 @@ describe("Tic-Tac-Toe::", function() {
                 expect(game.winningSequence).toEqual(sequences[i]);
             }
         });
-
     });
 
     describe('game over function', function() {
@@ -112,7 +108,6 @@ describe("Tic-Tac-Toe::", function() {
                 expect(game.gameOver()).toBe(true);
             }
         }); 
-
     });
 
     describe('no available moves function', function() {
@@ -130,7 +125,6 @@ describe("Tic-Tac-Toe::", function() {
             game.numberOfMoves = 9;
             expect(game.noAvailableMoves()).toBe(true);
         });
-
     });
 
     describe('empty square function', function() {
@@ -143,16 +137,5 @@ describe("Tic-Tac-Toe::", function() {
             game.registerMove(0);
             expect(game.emptySquare(0)).toBe(false);
         });
-
     });
-
-    describe('', function() {
-
-        it('', function() {
- 
-        });
-
-    });
-
 });
-
