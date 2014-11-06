@@ -7,7 +7,7 @@
 * [App Screenshot](#app-screenshot)
 * [General Description](#general-description)
 * [See it Live on Github](#see-it-live-on-github)
-* [How to Install and Run the Game Locally](#how-to-install-and-run-the-game-locally)
+* [How to Run the Game Locally](#how-to-run-the-game-locally)
 * [Browsers](#browsers)
 * [Testing](#testing)
 * [License](#license)
@@ -55,14 +55,22 @@ A live version of the game can be found (and played!) at:
 (Please see notes about browser compatibility below).
 
 
-##How to Install and Run the Game Locally
+##How to Run the Game Locally
 
-Clone the repo to a local folder and run the following commands in terminal:
+To run the game locally is to clone the repo to a local folder 
+and run the following commands in terminal:
 
 ```bash
-$ cd tic-tac-toe
-$ open ./lib/index.html
+$> cd tic-tac-toe
+$> npm install
+$> node server
 ```
+And then open Chrome and go to this address:
+
+```
+http://localhost:3000/
+```
+
 
 ##Browsers
 
@@ -77,12 +85,24 @@ Pleae note that it may not work as intended in other browsers.
 
 Tests were written with [Jasmine (2.0.0)](http://jasmine.github.io/2.0/introduction.html).
 
-To run the tests, clone the repo to a local folder and run:
+To run the tests, first clone the repo to a local folder and then: 
+
+For the [Jasmine](http://jasmine.github.io/2.0/introduction.html) back-end tests, 
+run these commands in terminal:
 
 ```bash
-$ cd tic-tac-toe
-$ open ./spec/SpecRunner.html
+$> cd tic-tac-toe
+$> open ./spec/SpecRunner.html
 ```
+
+For the Mocha front-end tests run these commands in terminal:
+(note: make sure the 'node server' isn't running!)
+
+```bash
+$> cd tic-tac-toe
+$> mocha
+```
+
 
 ##License
 
