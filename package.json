@@ -1,33 +1,33 @@
 {
-    "name": "tic-tac-toe",
-    "version": "1.0.0",
-    "description": "js tic tac toe",
-    "main": "index.js",
-    "scripts": {
-        "test": "mocha",
-        "start": "node server"
-    },
-    "repository": {
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "description": "js tic tac toe",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node server"
+  },
+  "repository": {
     "type": "git",
     "url": "https://github.com/nadavmatalon/tic-tac-toe.git"
-    },
-    "keywords": [
-        "tic",
-        "tac",
-        "toe"
-    ],
-    "author": "Nadav Matalon",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/nadavmatalon/tic-tac-toe/issues"
-    },
-    "homepage": "https://github.com/nadavmatalon/tic-tac-toe",
-    "devDependencies": {
-        "chai": "^1.9.2",
-        "mocha": "^2.0.1",
-        "zombie": "^2.1.1"
-    },
-    "dependencies": {
-        "express": "^4.10.1"
-    }
+  },
+  "keywords": [
+    "tic",
+    "tac",
+    "toe"
+  ],
+  "author": "Nadav Matalon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nadavmatalon/tic-tac-toe/issues"
+  },
+  "homepage": "https://github.com/nadavmatalon/tic-tac-toe",
+  "devDependencies": {
+    "chai": "^1.9.2",
+    "mocha": "^2.0.1",
+    "zombie": "^2.1.1"
+  },
+  "dependencies": {
+    "express": "^4.10.1"
+  }
 }
