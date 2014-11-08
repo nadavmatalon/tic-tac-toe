@@ -12,9 +12,7 @@ input {
 	text-align: center;
 	font-size: 60px;
 	font-weight: 500;
-	width: 46px;
-	height: 60px;
-	margin-top: 3px;
+	width: 66px;
 	color: rgb(0, 0, 1);
 	text-decoration: none !important;
 	outline: none;
@@ -35,7 +33,7 @@ input {
 	text-align: center;
 }
 
-.column-container div {
+.column-container button {
 	display: none;
 	width: 80px;
 	height: 80px;
@@ -43,7 +41,7 @@ input {
 	margin-left: 2px;
 	margin-right: 1px;
 	margin-top: 3px;
-	margin-bottom: 6px;
+	margin-bottom: 4px;
 }
 
 .square {
@@ -61,6 +59,7 @@ input {
 	border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
 	border-color: #e6e6e6 #e6e6e6 #bfbfbf;
 	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	outline: none !important;
 }
 
 .square:hover {

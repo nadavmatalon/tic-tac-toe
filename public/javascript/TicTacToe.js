@@ -14,6 +14,7 @@
             var selectedSquare = $(this).data('pick');
             if (!game.gameOver() && game.emptySquare(selectedSquare)) {
                 $(this).find('input').val(game.currentTurn);
+                // $(this).text(game.currentTurn);
                 game.playTurn(selectedSquare);
             }
             if (game.gameOver()) {
@@ -40,6 +41,20 @@
                 });
             });     
         });
+
+        // var button = document.createElement("button");
+        // button.id = 'button';
+        // button.innerHTML = "Do Something";
+
+        // // 2. Append somewhere
+        // var body = document.getElementsByTagName("body")[0];
+        // body.appendChild(button);
+
+        // // 3. Add event handler
+        // button.addEventListener ("click", function() {
+        //   alert("did something");
+        // });
+
     });
 })();
 
