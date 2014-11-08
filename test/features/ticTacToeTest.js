@@ -17,37 +17,52 @@ describe('Tic-Tac-Toe', function() {
 		browser.visit('/', done);
 	});
 
-	it('can visit the home page', function() {
+	it('should load successfully', function() {
 		expect(browser.success).to.be.true;
 	});
 
-	it('has the correct title', function() {
-		expect(browser.text('span')).to.equal('TIC • TAC • TOE');
+	it('should have the currect page title', function() {
+		browser.assert.text('title', 'TIC • TAC • TOE');
 	});
 
-	// it('does not initially show the new game button', function(done) {
+	it('should contain the correct page heading', function() {
+		expect(browser.query('#page-title')).to.exist;
+		expect(browser.text('#page-title')).to.equal('TIC • TAC • TOE');
+	});
 
-	// });
+	it('should contain 9 squares', function() {
+		var squareArray = browser.queryAll('.square');
+		expect(squareArray).to.have.length.of(9);
+	});
+
+	it('does not initially show the new game button', function(done) {
+		// browser.viewInBrowser('Safari');
+		var newGameButton = browser.query('.new-game-button');
+		console.log(newGameButton);
+		// expect(newGameButton).to.have.css('display', 'none');
+		// console.log(browser.html());
+		done();
+	});
 
 	it('shows the new game button if game is won', function(done) {
-		var button = browser.document.getElementById("new-game-button");
-		browser.pressButton("#square-one");
-		browser.pressButton("#square-two");
-		browser.pressButton("#square-three");
-		browser.pressButton("#square-four");
-		browser.pressButton("#square-five");
-		browser.pressButton("#square-six");
-		// browser.viewInBrowser('firefox');
-		browser.pressButton("#square-seven").then(function() {;
-			browser.pressButton(".new-game-button");
-		}).then(done);
+		squares = [
+			'#square-one', 
+			'#square-two', 
+			'#square-three',
+			'#square-four',
+			'#square-five',
+			'#square-six'
+			]
+		squares.forEach(function(square) {
+			browser.pressButton(square);
+		});
+		done();
+		expect(browser.query('.new-game-button')).to.exist;
 	});
 
-	it('has 9 squares', function(done) {
-		var item = browser.document.getElementById("0");
-		browser.pressButton("#square-one", function() {
-
-			var item1 = browser.query(".my-class").value;
+	it('should giva square a value if clicked', function(done) {
+		browser.pressButton('#square-one', function() {
+			var item1 = browser.query('.my-class').value;
 			console.log(item1);
     	});
     	done();
