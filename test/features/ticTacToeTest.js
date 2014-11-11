@@ -102,37 +102,5 @@ describe('Tic-Tac-Toe', function() {
 
 
  	});
-
-
-
-
-	// it('shows the new game button if game is won', function(done) {
-	// 	squares = [
-	// 		'#square-one', 
-	// 		'#square-two', 
-	// 		'#square-three',
-	// 		'#square-four',
-	// 		'#square-five',
-	// 		'#square-six',
-	// 		'#square-seven'
-	// 		]
-	// 	squares.forEach(function(square) {
-	// 		browser.pressButton(square);
-	// 	});
-	// 	expect(browser.query('.new-game-button')).to.exist;
-	// 	browser.wait(function(e, browser) {
-	// 		browser.assert.style('.new-game-button', 'display', 'inline-block');
-	// 	});
-	// 	done();
-	// });
-
-	// xit('should designate value to a square a value if clicked', function(done) {
-	// 	browser.pressButton('#square-one', function() {
-	// 		item1 = browser.query('.my-class').value;
-	// 		console.log(item1);
- //    	});
- //    	done();
- //    	expect(browser.text('#page-title')).to.equal('TIC • TAC • TOE');
-	// });
 });
 
