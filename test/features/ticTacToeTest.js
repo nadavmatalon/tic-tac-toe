@@ -57,6 +57,21 @@ describe('Tic-Tac-Toe', function() {
 			browser.pressButton('#square-one');
 			expect(browser.query('.button-one').value).to.equal(currentTurn);
     	});
+
+		it('squares should be cleared when new game button is clicked', function() {
+			['#square-one', '#square-two', '#square-three', 
+			 '#square-four', '#square-five', '#square-six', 
+			 '#square-seven'].forEach(function(square) {
+				browser.pressButton(square);
+			});
+			browser.pressButton('.new-game-button').then (function() {
+				['.button-one', '.button-two', '.button-three', '.button-four',
+				 '.button-five', '.button-six', '.button-seven', '.button-eight',
+				 '.button-nine'].forEach(function(square) {
+					expect(browser.query(square).value).to.equal('');
+				});
+			});
+    	});
 	});
 
  	describe('game', function() {
