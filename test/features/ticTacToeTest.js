@@ -9,12 +9,22 @@ describe('Tic-Tac-Toe', function() {
 
 	var browser;
 
+	var squares = [
+		'#square-one', 
+		'#square-two', 
+		'#square-three',
+		'#square-four',
+		'#square-five',
+		'#square-six',
+		'#square-seven'
+		]
+
 	before('run server', function() {
 		server = server.listen(3000);
 		browser = Browser.create({ site: 'http://localhost:3000', debug: true });
 	});
 
-	describe('page elements', function() {
+	describe('page features', function() {
 
 		before('refresh page', function(done) {
 			browser.visit('http://localhost:3000/', done);
@@ -29,7 +39,6 @@ describe('Tic-Tac-Toe', function() {
 		});
 
 		it('should contain the correct page heading', function() {
-			expect(browser.query('#page-title')).to.exist;
 			expect(browser.text('#page-title')).to.equal('TIC • TAC • TOE');
 		});
 
@@ -37,36 +46,69 @@ describe('Tic-Tac-Toe', function() {
 			var squareArray = browser.queryAll('.square');
 			expect(squareArray).to.have.length.of(9);
 		});
+	});	
 
-		it('should not show the new game button', function() {
-            expect(browser.evaluate("game.gameOver()")).to.be.false;
-        });
-    });
-
- 	describe('page elements', function() {
+ 	describe('game', function() {
 
 		beforeEach('refresh page', function(done) {
 			browser.visit('http://localhost:3000/', done);
 		});
 
-		it('shows the new game button if game is won', function() {
-			squares = [
-				'#square-one', 
-				'#square-two', 
-				'#square-three',
-				'#square-four',
-				'#square-five',
-				'#square-six',
-				'#square-seven'
-				]
+		it('should initially not be over', function() {
+            expect(browser.evaluate("game.gameOver()")).to.be.false;
+        });
+
+		it('squares should all be initially empty', function() {
+            expect(browser.query('.button-one'.value)).to.equal(undefined);
+            expect(browser.query('.button-two'.value)).to.equal(undefined);
+            expect(browser.query('.button-three'.value)).to.equal(undefined);
+            expect(browser.query('.button-four'.value)).to.equal(undefined);
+            expect(browser.query('.button-five'.value)).to.equal(undefined);
+            expect(browser.query('.button-six'.value)).to.equal(undefined);
+            expect(browser.query('.button-seven'.value)).to.equal(undefined);
+            expect(browser.query('.button-eight'.value)).to.equal(undefined);
+            expect(browser.query('.button-nine'.value)).to.equal(undefined);
+        });
+
+
+			// console.log('------');
+			// console.log(browser.query('.button-one').value);
+			// console.log(browser.query('.button-two').value);
+			// console.log(browser.query('.button-three').value);
+			// console.log(browser.query('.button-four').value);
+			// console.log(browser.query('.button-five').value);
+			// console.log(browser.query('.button-six').value);
+			// console.log(browser.query('.button-seven').value);
+			// console.log(browser.query('.button-eight').value);
+			// console.log(browser.query('.button-nine').value);
+			// console.log('------');
+
+
+
+		it('should be over if winning sequence is reached', function() {
 			squares.forEach(function(square) {
 				browser.pressButton(square);
 			});
 			expect(browser.evaluate("game.gameOver()")).to.be.true;
 		});
 
-
-
+		it('should be over if all possible moves were made', function() {
+			squares = [
+				'#square-one', 
+				'#square-two', 
+				'#square-three',
+				'#square-four',
+				'#square-six',
+				'#square-nine',
+				'#square-five',
+				'#square-seven',
+				'#square-eight',
+				]
+			squares.forEach(function(square) {
+				browser.pressButton(square);
+			});
+			expect(browser.evaluate("game.gameOver()")).to.be.true;
+		});
 
 
  	});
