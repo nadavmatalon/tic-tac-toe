@@ -9,16 +9,6 @@ describe('Tic-Tac-Toe', function() {
 
 	var browser;
 
-	var squares = [
-		'#square-one', 
-		'#square-two', 
-		'#square-three',
-		'#square-four',
-		'#square-five',
-		'#square-six',
-		'#square-seven'
-		]
-
 	before('run server', function() {
 		server = server.listen(3000);
 		browser = Browser.create({ site: 'http://localhost:3000', debug: true });
@@ -59,33 +49,33 @@ describe('Tic-Tac-Toe', function() {
         });
 
 		it('squares should all be initially empty', function() {
-            expect(browser.query('.button-one'.value)).to.equal(undefined);
-            expect(browser.query('.button-two'.value)).to.equal(undefined);
-            expect(browser.query('.button-three'.value)).to.equal(undefined);
-            expect(browser.query('.button-four'.value)).to.equal(undefined);
-            expect(browser.query('.button-five'.value)).to.equal(undefined);
-            expect(browser.query('.button-six'.value)).to.equal(undefined);
-            expect(browser.query('.button-seven'.value)).to.equal(undefined);
-            expect(browser.query('.button-eight'.value)).to.equal(undefined);
-            expect(browser.query('.button-nine'.value)).to.equal(undefined);
+            expect(browser.query('.button-one').value).to.equal('');
+            expect(browser.query('.button-two').value).to.equal('');
+            expect(browser.query('.button-three').value).to.equal('');
+            expect(browser.query('.button-four').value).to.equal('');
+            expect(browser.query('.button-five').value).to.equal('');
+            expect(browser.query('.button-six').value).to.equal('');
+            expect(browser.query('.button-seven').value).to.equal('');
+            expect(browser.query('.button-eight').value).to.equal('');
+            expect(browser.query('.button-nine').value).to.equal('');
         });
 
-
-			// console.log('------');
-			// console.log(browser.query('.button-one').value);
-			// console.log(browser.query('.button-two').value);
-			// console.log(browser.query('.button-three').value);
-			// console.log(browser.query('.button-four').value);
-			// console.log(browser.query('.button-five').value);
-			// console.log(browser.query('.button-six').value);
-			// console.log(browser.query('.button-seven').value);
-			// console.log(browser.query('.button-eight').value);
-			// console.log(browser.query('.button-nine').value);
-			// console.log('------');
-
-
+		it('square should get a value if clicked', function() {
+			var currentTurn = browser.evaluate("game.currentTurn");
+			browser.pressButton('#square-one');
+			expect(browser.query('.button-one').value).to.equal(currentTurn);
+    	});
 
 		it('should be over if winning sequence is reached', function() {
+			var squares = [
+				'#square-one', 
+				'#square-two', 
+				'#square-three',
+				'#square-four',
+				'#square-five',
+				'#square-six',
+				'#square-seven'
+				]
 			squares.forEach(function(square) {
 				browser.pressButton(square);
 			});
@@ -93,7 +83,7 @@ describe('Tic-Tac-Toe', function() {
 		});
 
 		it('should be over if all possible moves were made', function() {
-			squares = [
+			var squares = [
 				'#square-one', 
 				'#square-two', 
 				'#square-three',
@@ -102,7 +92,7 @@ describe('Tic-Tac-Toe', function() {
 				'#square-nine',
 				'#square-five',
 				'#square-seven',
-				'#square-eight',
+				'#square-eight'
 				]
 			squares.forEach(function(square) {
 				browser.pressButton(square);
