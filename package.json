@@ -23,7 +23,8 @@
   },
   "homepage": "https://github.com/nadavmatalon/tic-tac-toe",
   "devDependencies": {
-    "chai": "^1.9.2",
+    "chai": "^1.10.0",
+    "express": "^4.10.2",
     "mocha": "^2.0.1",
     "zombie": "^2.1.1"
   },

@@ -2,7 +2,7 @@
 
     $(document).ready(function() {
 
-        var game = new Game();
+        window.game = new Game();
 
         $('.title').fadeIn(400, function() {
             $('.square').each(function(square) {
