@@ -46,11 +46,11 @@ is allocated randomly by the app on the initialization of each new game. When
 a winning sequence is reached or all the squares are full the game is over 
 and a new game can be started.
 
-__Update (11.11.14):__ Added front-end Javascript feature testing with 
+__Update (11.11.14)__ : Added front-end Javascript feature testing with 
 [Zombie.js](http://zombie.labnotes.org/) &amp; 
-[Mocha](https://www.npmjs.org/package/mocha)) using 
+[Mocha](https://www.npmjs.org/package/mocha) using 
 the [node.js](http://nodejs.org/) platform, [Express](http://expressjs.com/) framework 
-&amp; [Chai (1.10.0)](http://chaijs.com/) assertion library.
+&amp; [Chai](http://chaijs.com/) assertion library.
 
 
 ##See it Live on Github
@@ -93,11 +93,11 @@ Pleae note that it may not work as intended in other browsers.
 ##Testing
 
 Tests were written with [Jasmine (2.0.0)](http://jasmine.github.io/2.0/introduction.html) 
-for the back-end logic &amp; 
+for the back-end logic and 
 [Zombie.js (2.1.1)](http://zombie.labnotes.org/) + 
 [Mocha (2.0.1)](https://www.npmjs.org/package/mocha)) +
 [Chai (1.10.0)](http://chaijs.com/) 
-for the front-end feature testing.
+for the front-end functionality.
 
 To run the tests, clone the repo to a local folder and then: 
 
