@@ -109,9 +109,8 @@ $> cd tic-tac-toe
 $> open ./spec/SpecRunner.html
 ```
 
-For the [Zombie](http://zombie.labnotes.org/)-
-[Mocha](https://www.npmjs.org/package/mocha)-
-[Chai](http://chaijs.com/) front-end tests run these commands in terminal:
+For the [Zombie](http://zombie.labnotes.org/)-[Mocha](https://www.npmjs.org/package/mocha)-[Chai](http://chaijs.com/) 
+front-end tests run these commands in terminal:
 (note: make sure that the 'node server' isn't running at the same time!)
 
 ```bash
