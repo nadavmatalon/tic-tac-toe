@@ -1,3 +1,5 @@
+var game;
+
 (function() {
 
     $(document).ready(function() {
