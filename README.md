@@ -7,7 +7,7 @@
 * [App Screenshot](#app-screenshot)
 * [General Description](#general-description)
 * [See it Live on Github](#see-it-live-on-github)
-* [How to Run the Game Locally](#how-to-run-the-game-locally)
+* [How to Install and Run the Game](#how-to-install-and-run-the-game)
 * [Browsers](#browsers)
 * [Testing](#testing)
 * [License](#license)
@@ -35,7 +35,8 @@ as an exercise in buiding a
 using [jQuery](http://jquery.com) functionality and 
 [TDD](http://en.wikipedia.org/wiki/Test-driven_development) 
 methodology (tests were written with 
-[Jasmine](http://jasmine.github.io/2.0/introduction.html)). 
+[Jasmine](http://jasmine.github.io/2.0/introduction.html) &amp;
+[Mocha](https://www.npmjs.org/package/mocha)).
 
 It basically does what it says on the tin, namely: implements the game of 
 Tic-Tac-Toe. 
@@ -55,7 +56,7 @@ A live version of the game can be found (and played!) at:
 (Please see notes about browser compatibility below).
 
 
-##How to Run the Game Locally
+##How to Install and Run the Game
 
 To run the game locally is to clone the repo to a local folder 
 and run the following commands in terminal:
@@ -76,16 +77,19 @@ http://localhost:3000/
 
 This app has been tested with and supports the following browsers:
 
-* __Google Chrome__ (36.0)
+* __Google Chrome__ (38.0)
+* __Apple Safari__ (7.0.6)
+* __Mozilla Firefox__ (33.0 or later)
 
 Pleae note that it may not work as intended in other browsers.
 
 
 ##Testing
 
-Tests were written with [Jasmine (2.0.0)](http://jasmine.github.io/2.0/introduction.html).
+Tests were written with [Jasmine (2.0.0)](http://jasmine.github.io/2.0/introduction.html) 
+&amp; [Mocha](https://www.npmjs.org/package/mocha)). 
 
-To run the tests, first clone the repo to a local folder and then: 
+To run the tests, clone the repo to a local folder and then: 
 
 For the [Jasmine](http://jasmine.github.io/2.0/introduction.html) back-end tests, 
 run these commands in terminal:
@@ -96,7 +100,7 @@ $> open ./spec/SpecRunner.html
 ```
 
 For the Mocha front-end tests run these commands in terminal:
-(note: make sure the 'node server' isn't running!)
+(note: make sure that the 'node server' isn't running at the same time!)
 
 ```bash
 $> cd tic-tac-toe
