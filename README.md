@@ -35,8 +35,8 @@ as an exercise in buiding a
 using [jQuery](http://jquery.com) functionality and 
 [TDD](http://en.wikipedia.org/wiki/Test-driven_development) 
 methodology (tests were written with 
-[Jasmine](http://jasmine.github.io/2.0/introduction.html) &amp;
-[Mocha](https://www.npmjs.org/package/mocha)).
+[Jasmine](http://jasmine.github.io/2.0/introduction.html)).
+
 
 It basically does what it says on the tin, namely: implements the game of 
 Tic-Tac-Toe. 
@@ -45,6 +45,12 @@ To play simply click on one of the 9 squares. The starting turn ('X' or 'O')
 is allocated randomly by the app on the initialization of each new game. When 
 a winning sequence is reached or all the squares are full the game is over 
 and a new game can be started.
+
+__Update (11.11.14):__ Added front-end Javascript feature testing with 
+[Zombie.js](http://zombie.labnotes.org/) &amp; 
+[Mocha](https://www.npmjs.org/package/mocha)) using 
+the [node.js](http://nodejs.org/) platform, [Express](http://expressjs.com/) framework 
+&amp; [Chai (1.10.0)](http://chaijs.com/) assertion library.
 
 
 ##See it Live on Github
@@ -87,7 +93,11 @@ Pleae note that it may not work as intended in other browsers.
 ##Testing
 
 Tests were written with [Jasmine (2.0.0)](http://jasmine.github.io/2.0/introduction.html) 
-&amp; [Mocha](https://www.npmjs.org/package/mocha)). 
+for the back-end logic &amp; 
+[Zombie.js (2.1.1)](http://zombie.labnotes.org/) + 
+[Mocha (2.0.1)](https://www.npmjs.org/package/mocha)) +
+[Chai (1.10.0)](http://chaijs.com/) 
+for the front-end feature testing.
 
 To run the tests, clone the repo to a local folder and then: 
 
@@ -99,7 +109,7 @@ $> cd tic-tac-toe
 $> open ./spec/SpecRunner.html
 ```
 
-For the Mocha front-end tests run these commands in terminal:
+For the Zombie-Mocha-Chai front-end tests run these commands in terminal:
 (note: make sure that the 'node server' isn't running at the same time!)
 
 ```bash
