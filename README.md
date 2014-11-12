@@ -95,7 +95,7 @@ Pleae note that it may not work as intended in other browsers.
 Tests were written with [Jasmine (2.0.0)](http://jasmine.github.io/2.0/introduction.html) 
 for the back-end logic and 
 [Zombie.js (2.1.1)](http://zombie.labnotes.org/) + 
-[Mocha (2.0.1)](https://www.npmjs.org/package/mocha)) +
+[Mocha (2.0.1)](https://www.npmjs.org/package/mocha) +
 [Chai (1.10.0)](http://chaijs.com/) 
 for the front-end functionality.
 
