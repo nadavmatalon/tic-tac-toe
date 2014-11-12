@@ -11,10 +11,9 @@
         });
         
         $('.square').on('click', function() {
-            var selectedSquare = $(this).data('pick');
+            var selectedSquare = $(this).prop('name');
             if (!game.gameOver() && game.emptySquare(selectedSquare)) {
                 $(this).find('input').val(game.currentTurn);
-                // $(this).text(game.currentTurn);
                 game.playTurn(selectedSquare);
             }
             if (game.gameOver()) {
@@ -30,31 +29,17 @@
 
         $('.new-game-button').on('click', function() {
             game = new Game();
-            var squares = ['#0', '#1', '#2', '#3', '#4', '#5', '#6', '#7', '#8'];
-            $.each(squares.concat(['.new-game-button']), function(index, squareValue) {
+            var squareValues = ['#0', '#1', '#2', '#3', '#4', '#5', '#6', '#7', '#8'];
+            $.each(squareValues.concat(['.new-game-button']), function(index, squareValue) {
                 $(squareValue).fadeOut(250, function() {
-                    $.each(squares, function(index, square) {
-                        $(square).val('').show(function() {
+                    $.each(squareValues, function(index, squareValue) {
+                        $(squareValue).val('').show(function() {
                             $('.square').children().css('color', 'rgb(0, 0, 0');
                         });
                     });
                 });
             });     
         });
-
-        // var button = document.createElement("button");
-        // button.id = 'button';
-        // button.innerHTML = "Do Something";
-
-        // // 2. Append somewhere
-        // var body = document.getElementsByTagName("body")[0];
-        // body.appendChild(button);
-
-        // // 3. Add event handler
-        // button.addEventListener ("click", function() {
-        //   alert("did something");
-        // });
-
     });
 })();
 

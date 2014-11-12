@@ -5,14 +5,24 @@ var expect = chai.expect;
 var should = chai.should();
 var Browser = require('zombie');
 
-describe('Tic-Tac-Toe', function() {
+var browser;
 
-	var browser;
+var squareValues = ['.input-0', '.input-1', '.input-2', '.input-3', '.input-4', 
+					'.input-5', '.input-6', '.input-7', '.input-8'];
+
+
+
+
+describe('Tic-Tac-Toe', function() {
 
 	before('run server', function() {
 		server = server.listen(3000);
 		browser = Browser.create({ site: 'http://localhost:3000', debug: true });
 	});
+
+	after(function () {
+		browser.close();
+  	});
 
 	describe('page', function() {
 
@@ -45,30 +55,22 @@ describe('Tic-Tac-Toe', function() {
 		});
 
 		it('squares should initially be empty', function() {
-			['.button-one', '.button-two', '.button-three', '.button-four',
-			 '.button-five', '.button-six', '.button-seven', '.button-eight',
-			 '.button-nine'].forEach(function(square) {
-				expect(browser.query(square).value).to.equal('');
+			 squareValues.forEach(function(squareValue) {
+				expect(browser.query(squareValue).value).to.equal('');
 			});
         });
 
 		it('square should be assigned a value when clicked', function() {
 			var currentTurn = browser.evaluate("game.currentTurn");
 			browser.pressButton('#square-one');
-			expect(browser.query('.button-one').value).to.equal(currentTurn);
+			expect(browser.query('.input-0').value).to.equal(currentTurn);
     	});
 
 		it('squares should be cleared when new game button is clicked', function() {
-			['#square-one', '#square-two', '#square-three', 
-			 '#square-four', '#square-five', '#square-six', 
-			 '#square-seven'].forEach(function(square) {
-				browser.pressButton(square);
-			});
+			winGame();
 			browser.pressButton('.new-game-button').then (function() {
-				['.button-one', '.button-two', '.button-three', '.button-four',
-				 '.button-five', '.button-six', '.button-seven', '.button-eight',
-				 '.button-nine'].forEach(function(square) {
-					expect(browser.query(square).value).to.equal('');
+			 	squareValues.forEach(function(squareValue) {
+					expect(browser.query(squareValue).value).to.equal('');
 				});
 			});
     	});
@@ -85,18 +87,15 @@ describe('Tic-Tac-Toe', function() {
         });
 
 		it('should be over if winning sequence is reached', function() {
-			['#square-one', '#square-two', '#square-three', 
-			 '#square-four', '#square-five', '#square-six', 
-			 '#square-seven'].forEach(function(square) {
-				browser.pressButton(square);
-			});
+			winGame()
 			expect(browser.evaluate("game.gameOver()")).to.be.true;
 		});
 
 		it('should be over if all possible moves were made', function() {
-			['#square-one', '#square-two', '#square-three', '#square-four',
-			 '#square-six', '#square-nine', '#square-five', '#square-seven', 
-			 '#square-eight'].forEach(function(square) {
+			var fillSequence = ['#square-one', '#square-two', '#square-three', 
+							    '#square-four', '#square-six', '#square-nine', 
+							    '#square-five', '#square-seven', '#square-eight'];
+			 fillSequence.forEach(function(square) {
 				browser.pressButton(square);
 			});
 			expect(browser.evaluate("game.gameOver()")).to.be.true;
@@ -104,3 +103,10 @@ describe('Tic-Tac-Toe', function() {
  	});
 });
 
+function winGame() {
+	var winningSequence = ['#square-one', '#square-two', '#square-three', '#square-four', 
+						   '#square-five', '#square-six', '#square-seven'];
+	 winningSequence.forEach(function(square) {
+		browser.pressButton(square);
+	});
+}
