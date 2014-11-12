@@ -109,7 +109,9 @@ $> cd tic-tac-toe
 $> open ./spec/SpecRunner.html
 ```
 
-For the Zombie-Mocha-Chai front-end tests run these commands in terminal:
+For the [Zombie.js (2.1.1)](http://zombie.labnotes.org/)-
+[Mocha (2.0.1)](https://www.npmjs.org/package/mocha)-
+[Chai (1.10.0)](http://chaijs.com/) front-end tests run these commands in terminal:
 (note: make sure that the 'node server' isn't running at the same time!)
 
 ```bash
