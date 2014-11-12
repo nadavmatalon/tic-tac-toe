@@ -4,53 +4,71 @@
 		<title>TIC • TAC • TOE</title>
 		<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 		<meta http-equiv='X-UA-Compatible' content='IE=edge' />
-		<link type='text/css' rel='stylesheet' href='./../public/css/style.css' />
-		<script type='text/javascript' src='./../public/javascript/jquery-2.1.1.js' /></script>
-		<script type='text/javascript' src='./../public/javascript/jquery-ui-1.11.2.min.js' /></script>
-		<script type='text/javascript' src='./../public/javascript/game.js' /></script>
-		<script type='text/javascript' src='./../public/javascript/TicTacToe.js' /></script>
+		<link type='text/css' rel='stylesheet' href='css/style.css' />
+		<script type='text/javascript' src='javascript/jquery-2.1.1.js' /></script>
+		<script type='text/javascript' src='javascript/jquery-ui-1.11.2.min.js' /></script>
+		<script type='text/javascript' src='javascript/game.js' /></script>
+		<script type='text/javascript' src='javascript/TicTacToe.js' /></script>
 	</head>
 	<body>
 		<div class='title'>
-			<span>TIC • TAC • TOE</span>
+			<span id='page-title'>TIC • TAC • TOE</span>
 		</div>
 		<div class'squares-container'>
 			<div class='column-container' id='first-column'>
-				<div class='square' id='square-one' data-pick='0'>
-					<input id='0' val='' disabled >
+				<div>	
+					<button class='square' id='square-one' name='0'>
+						<input class='input-0' id='0' value='' disabled >
+					</button>
 				</div>
-				<div class='square' id='square-four' data-pick='3'>
-					<input id='3' val='' disabled >
+				<div>	
+					<button class='square' id='square-four' name='3'>
+						<input class='input-3' id='3' value='' disabled >
+					</button>
 				</div>
-				<div class='square' id='square-seven' data-pick='6'>
-					<input id='6' val='' disabled >
-				</div>
+				<div>
+					<button class='square' id='square-seven' name='6'>
+						<input class='input-6' id='6' value='' disabled >
+					</button>
+				</div>	
 			</div>
 			<div class='column-container' id='second-column'>
-				<div class='square' id='square-two' data-pick='1'>
-					<input id='1' val='' disabled >
+				<div>	
+					<button class='square' id='square-two'  name='1'>
+						<input class='input-1' id='1' value='' disabled >
+					</button>
+				</div>	
+				<div>	
+					<button class='square' id='square-five' name='4'>
+						<input class='input-4' id='4' value='' disabled >						
+					</button>
 				</div>
-				<div class='square' id='square-five' data-pick='4'>
-					<input id='4' val='' disabled >
-				</div>
-				<div class='square' id='square-eight' data-pick='7'>
-					<input id='7' val='' disabled >
+				<div>
+					<button class='square' id='square-eight'  name='7'>
+						<input class='input-7' id='7' value='' disabled >
+					</button>
 				</div>
 			</div>
 			<div class='column-container' id='third-column'>
-				<div class='square' id='square-three' data-pick='2'>
-					<input id='2' val='' disabled >
+				<div>	
+					<button class='square' id='square-three' name='2'>
+						<input class='input-2' id='2' value='' disabled >
+					</button>
 				</div>
-				<div class='square' id='square-six' data-pick='5'>
-					<input id='5' val='' disabled >
+				<div>	
+					<button class='square' id='square-six' name='5'>
+						<input class='input-5' id='5' value='' disabled >
+					</button>
 				</div>
-				<div class='square' id='square-nine' data-pick='8'>
-					<input id='8' val='' disabled >
+				<div>	
+					<button class='square' id='square-nine' name='8'>
+						<input class='input-8' id='8' value='' disabled >
+					</button>
 				</div>
 			</div>
 		</div>
 		<div class='new-game-button-container'>
-			<button type='button' class='new-game-button'>New Game</button>
+			<button class='new-game-button' >New Game</button>
 		</div>
 	</body>
 </html>

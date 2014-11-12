@@ -58,4 +58,3 @@ Game.prototype.emptySquare = function(squareIdentifier) {
     return this.grid[squareIdentifier] === undefined;
 };
 
-
