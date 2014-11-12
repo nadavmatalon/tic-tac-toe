@@ -4,7 +4,7 @@ var Game = function() {
     this.numberOfMoves = 0;
     this.currentTurn = this.getRandomTurn();
     this.winningSequence = undefined;
-}
+};
 
 Game.prototype.MAX_NUMBER_OF_MOVES = 9;
 
