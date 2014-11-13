@@ -1,23 +1,12 @@
+process.env.NODE_ENV = 'test';
+
 var server = require('../../server');
 var chai = require('chai');
-var assert = require("chai").assert;
+var assert = require('chai').assert;
 var expect = chai.expect;
 var should = chai.should();
 var Browser = require('zombie');
-
 var browser;
-
-var squareValues = [
-	'.input-0',
-	'.input-1',
-	'.input-2',
-	'.input-3',
-	'.input-4',
-	'.input-5', 
-	'.input-6',
-	'.input-7',
-	'.input-8'
-];
 
 describe('Tic-Tac-Toe', function() {
 
@@ -53,6 +42,18 @@ describe('Tic-Tac-Toe', function() {
     });
 
     describe('grid', function() {
+
+        var squareValues = [
+            '.input-0',
+            '.input-1',
+            '.input-2',
+            '.input-3',
+            '.input-4',
+            '.input-5',
+            '.input-6',
+            '.input-7',
+            '.input-8'
+        ];
 
         beforeEach('refresh page', function(done) {
             browser.visit('http://localhost:3000/', done);
@@ -96,7 +97,7 @@ describe('Tic-Tac-Toe', function() {
         });
 
         it('should be over if winning sequence is reached', function() {
-            winGame()
+            winGame();
             expect(browser.evaluate("game.gameOver()")).to.be.true;
         });
 
@@ -122,16 +123,15 @@ describe('Tic-Tac-Toe', function() {
 
 function winGame() {
     var winningSequence = [
-    	'#square-one', 
-    	'#square-two', 
-    	'#square-three', 
-    	'#square-four', 
-    	'#square-five', 
-    	'#square-six', 
-    	'#square-seven'
+        '#square-one', 
+        '#square-two', 
+        '#square-three', 
+        '#square-four', 
+        '#square-five', 
+        '#square-six', 
+        '#square-seven'
     ];
     winningSequence.forEach(function(square) {
         browser.pressButton(square);
     });
 }
-

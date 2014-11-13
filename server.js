@@ -9,7 +9,7 @@ server.get('/', function(request, response) {
 });
 
 http.listen(3000, function() {
-	console.log("Server listening on 3000");
+	console.log('Server listening on 3000');
 });
 
 module.exports = http;
