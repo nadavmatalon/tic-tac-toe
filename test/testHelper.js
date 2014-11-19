@@ -18,32 +18,33 @@ module.exports = {
 
   winGame: function(browser) {
     var winningSequence = 
-    [
-      '#square-one',
-      '#square-two',
-      '#square-three',
-      '#square-four',
-      '#square-five',
-      '#square-six',
-      '#square-seven'
-    ];
+      [
+        '#square-one',
+        '#square-two',
+        '#square-three',
+        '#square-four',
+        '#square-five',
+        '#square-six',
+        '#square-seven'
+      ];
     winningSequence.forEach(function(square) {
       browser.pressButton(square);
     });
   },
 
   fillGrid: function(browser) {
-    var fillSequence = [
-      '#square-one',
-      '#square-two',
-      '#square-three',
-      '#square-four',
-      '#square-six',
-      '#square-nine',
-      '#square-five',
-      '#square-seven',
-      '#square-eight'
-    ];
+    var fillSequence = 
+      [
+        '#square-one',
+        '#square-two',
+        '#square-three',
+        '#square-four',
+        '#square-six',
+        '#square-nine',
+        '#square-five',
+        '#square-seven',
+        '#square-eight'
+      ];
     fillSequence.forEach(function(square) {
       browser.pressButton(square);
     });
