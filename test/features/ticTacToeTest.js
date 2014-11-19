@@ -12,8 +12,8 @@ var browser;
 describe('Tic-Tac-Toe', function() {
 
   before('run server', function() {
-      server = server.listen(3000);
-      browser = Browser.create({
+    server = server.listen(3000);
+    browser = Browser.create({
       site: 'http://localhost:3000',
       debug: true
     });
