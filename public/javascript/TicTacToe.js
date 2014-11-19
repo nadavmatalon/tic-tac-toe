@@ -14,7 +14,7 @@ var game;
       });
     });
 
-    $('.square').on('click', function() {
+    $('.square').click(function(event) {
       var selectedSquare = $(this).prop('name');
       if (!game.gameOver() && game.emptySquare(selectedSquare)) {
         $(this).find('input').val(game.currentTurn);
@@ -31,17 +31,12 @@ var game;
       }    
     });
 
-    $('.new-game-button').on('click', function() {
+    $('.new-game-button').click(function() {
       game = new Game();
-      var squareValues = ['#0', '#1', '#2', '#3', '#4', '#5', '#6', '#7', '#8'];
-      $.each(squareValues.concat(['.new-game-button']), function(index, squareValue) {
-        $(squareValue).fadeOut(250, function() {
-          $.each(squareValues, function(index, squareValue) {
-            $(squareValue).val('').show(function() {
-              $('.square').children().css('color', 'rgb(0, 0, 0');
-            });
-          });
-        });
+      $('.square-input').add('.new-game-button').fadeOut(250, function() {
+        $('.square-input').val('').show(function() {
+            $('.square-input').css('color', 'rgb(0, 0, 1)');
+        });   
       });     
     });
   });
