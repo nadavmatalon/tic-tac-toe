@@ -1,10 +1,3 @@
-.highlight {
-  -webkit-tab-size: 2 !important;
-  -moz-tab-size: 2 !important;
-  -o-tab-size: 2 !important;
-  tab-size: 2 !important;
-}
-
 body {
   font-family: "Gotham Narrow SSm",sans-serif,Arial;
   text-align: center;
