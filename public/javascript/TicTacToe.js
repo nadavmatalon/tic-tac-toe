@@ -14,7 +14,7 @@ var game;
       });
     });
 
-    $('.square').click(function(event) {
+    $('.square').click(function() {
       var selectedSquare = $(this).prop('name');
       if (!game.gameOver() && game.emptySquare(selectedSquare)) {
         $(this).find('input').val(game.currentTurn);
