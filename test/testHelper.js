@@ -17,7 +17,8 @@ module.exports = {
   },
 
   winGame: function(browser) {
-    var winningSequence = [
+    var winningSequence = 
+    [
       '#square-one',
       '#square-two',
       '#square-three',
