@@ -1,3 +1,5 @@
+"use strict";
+
 var Game = function() {
   this.grid = Array.apply(undefined, new Array(9));
   this.numberOfMoves = 0;
