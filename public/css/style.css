@@ -148,9 +148,9 @@ transition: background-position 0.1s linear;
 }
 
 .new-game-button:active {
-background-color: #006dcc;
-background-image: none;
-cursor: default;
-outline: 0;
-text-decoration: none;
+	background-color: #006dcc;
+	background-image: none;
+	cursor: default;
+	outline: 0;
+	text-decoration: none;
 }
